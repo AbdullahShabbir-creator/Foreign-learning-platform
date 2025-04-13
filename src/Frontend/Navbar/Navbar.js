@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
 import "../styles/main.css";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-  
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+
   // Handle navbar styling on scroll
   useEffect(() => {
     const handleScroll = () => {
@@ -19,9 +23,30 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Check if the path is active - using window.location instead of useLocation
+  // Check if the path is active
   const isActive = (path) => {
     return window.location.pathname === path;
+  };
+
+  // Handle protected route navigation
+  const handleProtectedRoute = (path) => {
+    if (!isAuthenticated) {
+      alert("Please login first to access this module");
+      navigate('/signup');
+      return;
+    }
+    navigate(path);
+  };
+
+  // Handle user dropdown toggle
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    navigate('/');
   };
 
   return (
@@ -75,33 +100,40 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 style={{ borderRadius: "var(--border-radius-md)" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleProtectedRoute('/ielts');
+                }}
               >
                 <i className="bi bi-book me-1"></i> Courses
               </a>
               <ul className="dropdown-menu shadow border-0" style={{ borderRadius: "var(--border-radius-md)", overflow: "hidden" }}>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/ielts') ? 'active bg-light' : ''}`} 
-                    to="/ielts"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/ielts')}
                   >
                     <i className="bi bi-trophy me-2"></i> IELTS
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/german') ? 'active bg-light' : ''}`} 
-                    to="/german"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/german')}
                   >
                     <i className="bi bi-geo me-2"></i> German
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/chinese') ? 'active bg-light' : ''}`} 
-                    to="/chinese"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/chinese')}
                   >
                     <i className="bi bi-translate me-2"></i> Chinese
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>
@@ -116,56 +148,69 @@ const Navbar = () => {
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
                 style={{ borderRadius: "var(--border-radius-md)" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleProtectedRoute('/practice-tests');
+                }}
               >
                 <i className="bi bi-journal-check me-1"></i> Practice Tests
               </a>
               <ul className="dropdown-menu shadow border-0" style={{ borderRadius: "var(--border-radius-md)", overflow: "hidden" }}>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/practice-tests') ? 'active bg-light' : ''}`} 
-                    to="/practice-tests"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/practice-tests')}
                   >
                     <i className="bi bi-grid-3x3-gap me-2"></i> All Tests
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/practice-tests/listening') ? 'active bg-light' : ''}`} 
-                    to="/practice-tests/listening"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/practice-tests/listening')}
                   >
                     <i className="bi bi-headphones me-2"></i> Listening Test
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/practice-tests/reading') ? 'active bg-light' : ''}`} 
-                    to="/practice-tests/reading"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/practice-tests/reading')}
                   >
                     <i className="bi bi-book me-2"></i> Reading Test
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/practice-tests/writing') ? 'active bg-light' : ''}`} 
-                    to="/practice-tests/writing"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/practice-tests/writing')}
                   >
                     <i className="bi bi-pencil me-2"></i> Writing Test
-                  </Link>
+                  </a>
                 </li>
                 <li>
-                  <Link 
+                  <a 
                     className={`dropdown-item py-2 ${isActive('/practice-tests/speaking') ? 'active bg-light' : ''}`} 
-                    to="/practice-tests/speaking"
+                    href="#"
+                    onClick={() => handleProtectedRoute('/practice-tests/speaking')}
                   >
                     <i className="bi bi-mic me-2"></i> Speaking Test
-                  </Link>
+                  </a>
                 </li>
               </ul>
             </li>
 
             {/* Recommendations */}
             <li className="nav-item mx-1">
-              <Link className="nav-link px-3 py-2" to="/recommendations" style={{ borderRadius: "var(--border-radius-md)" }}>
+              <Link 
+                className="nav-link px-3 py-2" 
+                to="/recommendations"
+                style={{ borderRadius: "var(--border-radius-md)" }}
+              >
                 <i className="bi bi-lightbulb me-1"></i> Recommendations
               </Link>
             </li>
@@ -173,12 +218,53 @@ const Navbar = () => {
 
           {/* Right Side - Account Controls */}
           <div className="d-flex mt-3 mt-lg-0">
-            <Link to="/login" className={`btn ${scrolled ? 'btn-light text-primary' : 'btn-outline-primary'} me-2`} style={{ whiteSpace: "nowrap" }}>
-              <i className="bi bi-box-arrow-in-right me-1"></i> Login
-            </Link>
-            <Link to="/signup" className={`btn ${scrolled ? 'btn-light text-primary' : 'btn-primary'}`} style={{ whiteSpace: "nowrap" }}>
-              <i className="bi bi-person-plus me-1"></i> Sign Up
-            </Link>
+            {!isAuthenticated ? (
+              <>
+                <Link to="/login" className={`btn ${scrolled ? 'btn-light text-primary' : 'btn-outline-primary'} me-2`} style={{ whiteSpace: "nowrap" }}>
+                  <i className="bi bi-box-arrow-in-right me-1"></i> Login
+                </Link>
+                <Link to="/signup" className={`btn ${scrolled ? 'btn-light text-primary' : 'btn-primary'}`} style={{ whiteSpace: "nowrap" }}>
+                  <i className="bi bi-person-plus me-1"></i> Sign Up
+                </Link>
+              </>
+            ) : (
+              <div className="dropdown">
+                <button 
+                  className={`btn ${scrolled ? 'btn-light text-primary' : 'btn-outline-primary'} me-2`} 
+                  type="button"
+                  id="userDropdown"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                  onClick={toggleDropdown}
+                >
+                  <i className="bi bi-person-circle me-1"></i>
+                  {user?.name}
+                </button>
+                <ul className="dropdown-menu dropdown-menu-end shadow border-0" style={{ borderRadius: "var(--border-radius-md)", overflow: "hidden" }}>
+                  <li>
+                    <Link className="dropdown-item py-2" to="/profile">
+                      <i className="bi bi-person me-2"></i> My Profile
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="dropdown-item py-2" to="/dashboard">
+                      <i className="bi bi-speedometer2 me-2"></i> Dashboard
+                    </Link>
+                  </li>
+                  <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
+                    <button 
+                      className="dropdown-item py-2 text-danger" 
+                      onClick={handleLogout}
+                    >
+                      <i className="bi bi-box-arrow-right me-2"></i> Logout
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
           </div>
         </div>
       </div>

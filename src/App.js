@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth } from './contexts/AuthContext';
 import './App.css';
 import './Frontend/styles/main.css';
 import './Frontend/styles/animations.css';
@@ -14,6 +15,7 @@ import ForgotPassword from './Frontend/Login/ForgotPassword';
 import ResetPassword from './Frontend/Login/ResetPassword';
 import ChangePassword from './Frontend/Login/ChangePassword';
 import AdminDashboard from './Frontend/Admin/AdminDashboard';
+import Profile from './Frontend/Profile/Profile';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
@@ -59,67 +61,226 @@ import Chapter8 from './Frontend/Chinese/Chapters/Chapter8';
 import Chapter9 from './Frontend/Chinese/Chapters/Chapter9';
 import Chapter10 from './Frontend/Chinese/Chapters/Chapter10';
 
+const PrivateRoute = ({ children }) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? children : <Navigate to="/login" />;
+};
+
 function App() {
   return (
     <Router>
       <div className="app">
         <Navbar />
         <Routes>
-          {/* Main Routes */}
+          {/* Public Routes */}
           <Route path="/" element={<HeroSection />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          <Route path="/admin" element={<AdminDashboard />} />
+
+          {/* Protected Routes */}
+          <Route path="/profile" element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          } />
           
+          <Route path="/admin" element={
+            <PrivateRoute>
+              <AdminDashboard />
+            </PrivateRoute>
+          } />
+
           {/* Language Course Pages */}
-          <Route path="/ielts" element={<IeltsPage />}>
-            <Route path="chapter1" element={<IELTSChapter1 />} />
-            <Route path="chapter2" element={<IELTSChapter2 />} />
-            <Route path="chapter3" element={<IELTSChapter3 />} />
-            <Route path="chapter4" element={<IELTSChapter4 />} />
-            <Route path="chapter5" element={<IELTSChapter5 />} />
-            <Route path="chapter6" element={<IELTSChapter6 />} />
-            <Route path="chapter7" element={<IELTSChapter7 />} />
-            <Route path="chapter8" element={<IELTSChapter8 />} />
-            <Route path="chapter9" element={<IELTSChapter9 />} />
-            <Route path="chapter10" element={<IELTSChapter10 />} />
+          <Route path="/ielts" element={
+            <PrivateRoute>
+              <IeltsPage />
+            </PrivateRoute>
+          }>
+            <Route path="chapter1" element={
+              <PrivateRoute>
+                <IELTSChapter1 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter2" element={
+              <PrivateRoute>
+                <IELTSChapter2 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter3" element={
+              <PrivateRoute>
+                <IELTSChapter3 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter4" element={
+              <PrivateRoute>
+                <IELTSChapter4 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter5" element={
+              <PrivateRoute>
+                <IELTSChapter5 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter6" element={
+              <PrivateRoute>
+                <IELTSChapter6 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter7" element={
+              <PrivateRoute>
+                <IELTSChapter7 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter8" element={
+              <PrivateRoute>
+                <IELTSChapter8 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter9" element={
+              <PrivateRoute>
+                <IELTSChapter9 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter10" element={
+              <PrivateRoute>
+                <IELTSChapter10 />
+              </PrivateRoute>
+            } />
           </Route>
           
-          {/* German Course Routes */}
-          <Route path="/german" element={<GermanPage />}>
-            <Route path="chapter1" element={<GermanChapter1 />} />
-            <Route path="chapter2" element={<GermanChapter2 />} />
-            <Route path="chapter3" element={<GermanChapter3 />} />
-            <Route path="chapter4" element={<GermanChapter4 />} />
-            <Route path="chapter5" element={<GermanChapter5 />} />
-            <Route path="chapter6" element={<GermanChapter6 />} />
-            <Route path="chapter7" element={<GermanChapter7 />} />
-            <Route path="chapter8" element={<GermanChapter8 />} />
-            <Route path="chapter9" element={<GermanChapter9 />} />
-            <Route path="chapter10" element={<GermanChapter10 />} />
+          <Route path="/german" element={
+            <PrivateRoute>
+              <GermanPage />
+            </PrivateRoute>
+          }>
+            <Route path="chapter1" element={
+              <PrivateRoute>
+                <GermanChapter1 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter2" element={
+              <PrivateRoute>
+                <GermanChapter2 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter3" element={
+              <PrivateRoute>
+                <GermanChapter3 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter4" element={
+              <PrivateRoute>
+                <GermanChapter4 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter5" element={
+              <PrivateRoute>
+                <GermanChapter5 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter6" element={
+              <PrivateRoute>
+                <GermanChapter6 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter7" element={
+              <PrivateRoute>
+                <GermanChapter7 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter8" element={
+              <PrivateRoute>
+                <GermanChapter8 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter9" element={
+              <PrivateRoute>
+                <GermanChapter9 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter10" element={
+              <PrivateRoute>
+                <GermanChapter10 />
+              </PrivateRoute>
+            } />
           </Route>
           
-          {/* Chinese Course Routes */}
-          <Route path="/chinese" element={<ChinesePage />}>
-            <Route path="chapter1" element={<Chapter1 />} />
-            <Route path="chapter2" element={<Chapter2 />} />
-            <Route path="chapter3" element={<Chapter3 />} />
-            <Route path="chapter4" element={<Chapter4 />} />
-            <Route path="chapter5" element={<Chapter5 />} />
-            <Route path="chapter6" element={<Chapter6 />} />
-            <Route path="chapter7" element={<Chapter7 />} />
-            <Route path="chapter8" element={<Chapter8 />} />
-            <Route path="chapter9" element={<Chapter9 />} />
-            <Route path="chapter10" element={<Chapter10 />} />
+          <Route path="/chinese" element={
+            <PrivateRoute>
+              <ChinesePage />
+            </PrivateRoute>
+          }>
+            <Route path="chapter1" element={
+              <PrivateRoute>
+                <Chapter1 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter2" element={
+              <PrivateRoute>
+                <Chapter2 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter3" element={
+              <PrivateRoute>
+                <Chapter3 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter4" element={
+              <PrivateRoute>
+                <Chapter4 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter5" element={
+              <PrivateRoute>
+                <Chapter5 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter6" element={
+              <PrivateRoute>
+                <Chapter6 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter7" element={
+              <PrivateRoute>
+                <Chapter7 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter8" element={
+              <PrivateRoute>
+                <Chapter8 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter9" element={
+              <PrivateRoute>
+                <Chapter9 />
+              </PrivateRoute>
+            } />
+            <Route path="chapter10" element={
+              <PrivateRoute>
+                <Chapter10 />
+              </PrivateRoute>
+            } />
           </Route>
           
           {/* Practice Tests Routes */}
-          <Route path="/practice-tests" element={<PracticeTestSelect />}>
-            <Route path="ielts/listening" element={<IELTSListeningTest />} />
-            <Route path="ielts/reading" element={<IELTSReadingTest />} />
+          <Route path="/practice-tests" element={
+            <PrivateRoute>
+              <PracticeTestSelect />
+            </PrivateRoute>
+          }>
+            <Route path="ielts/listening" element={
+              <PrivateRoute>
+                <IELTSListeningTest />
+              </PrivateRoute>
+            } />
+            <Route path="ielts/reading" element={
+              <PrivateRoute>
+                <IELTSReadingTest />
+              </PrivateRoute>
+            } />
           </Route>
         </Routes>
       </div>
