@@ -13,6 +13,7 @@ import Signup from './Frontend/Signup/Signup';
 import ForgotPassword from './Frontend/Login/ForgotPassword';
 import ResetPassword from './Frontend/Login/ResetPassword';
 import ChangePassword from './Frontend/Login/ChangePassword';
+import AdminDashboard from './Frontend/Admin/AdminDashboard';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
@@ -71,6 +72,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           
           {/* Language Course Pages */}
           <Route path="/ielts" element={<IeltsPage />}>

@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+//import "./Login.css";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [error, setError] = useState(null);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -12,22 +16,42 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(""); // Clear any previous errors
+    
     try {
+      console.log("Attempting login with:", formData);
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      
       const data = await response.json();
+      console.log("Login response:", data);
 
       if (response.ok) {
-        alert("Login Successful!");
-        navigate("/"); // Redirect to dashboard after login
+        localStorage.setItem('token', data.token);
+        
+        // Check if we have user data
+        if (data.user && data.user.role) {
+          console.log("User role:", data.user.role);
+          if (data.user.role === 'admin') {
+            alert("Admin login successful!");
+            navigate("/admin");
+          } else {
+            alert("Login successful!");
+            navigate("/");
+          }
+        } else {
+          console.error("No user role found in response:", data);
+          setError("Login successful but role information is missing");
+        }
       } else {
         setError(data.message || "Invalid email or password");
       }
     } catch (error) {
-      setError("Something went wrong. Please try again.");
+      console.error("Login error:", error);
+      setError("An error occurred during login. Please check if the server is running.");
     }
   };
 
@@ -87,9 +111,9 @@ const Login = () => {
         </form>
         <p className="text-center mt-3">
           Don't have an account?{" "}
-          <a href="/signup" className="text-decoration-none text-primary fw-semibold">
+          <Link to="/signup" className="text-decoration-none text-primary fw-semibold">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </div>
