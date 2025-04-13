@@ -22,7 +22,7 @@ const Login = () => {
 
       if (response.ok) {
         alert("Login Successful!");
-        navigate("/dashboard"); // Redirect to dashboard after login
+        navigate("/"); // Redirect to dashboard after login
       } else {
         setError(data.message || "Invalid email or password");
       }
