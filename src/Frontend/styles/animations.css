@@ -1,0 +1,336 @@
+/* Animations and modern UI styles */
+
+/* GENERAL ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translate3d(0, 40px, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translate3d(-40px, 0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translate3d(40px, 0, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-20px); }
+  60% { transform: translateY(-10px); }
+}
+
+@keyframes progressGrow {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes fadeInStagger {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ANIMATION CLASSES */
+.animate-fade-in {
+  animation: fadeIn 1s ease forwards;
+}
+
+.animate-slide-up {
+  animation: slideInUp 0.8s ease forwards;
+}
+
+.animate-slide-left {
+  animation: slideInLeft 0.8s ease forwards;
+}
+
+.animate-slide-right {
+  animation: slideInRight 0.8s ease forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-rotate {
+  animation: rotate 8s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s ease infinite;
+}
+
+.animate-progress {
+  animation: progressGrow 1.5s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation: fadeInStagger 0.5s ease forwards; }
+.stagger-item:nth-child(2) { animation: fadeInStagger 0.5s ease forwards 0.1s; }
+.stagger-item:nth-child(3) { animation: fadeInStagger 0.5s ease forwards 0.2s; }
+.stagger-item:nth-child(4) { animation: fadeInStagger 0.5s ease forwards 0.3s; }
+.stagger-item:nth-child(5) { animation: fadeInStagger 0.5s ease forwards 0.4s; }
+.stagger-item:nth-child(6) { animation: fadeInStagger 0.5s ease forwards 0.5s; }
+.stagger-item:nth-child(7) { animation: fadeInStagger 0.5s ease forwards 0.6s; }
+.stagger-item:nth-child(8) { animation: fadeInStagger 0.5s ease forwards 0.7s; }
+.stagger-item:nth-child(9) { animation: fadeInStagger 0.5s ease forwards 0.8s; }
+.stagger-item:nth-child(10) { animation: fadeInStagger 0.5s ease forwards 0.9s; }
+
+/* SCROLL ANIMATIONS */
+.animate-on-scroll {
+ 
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* HOVER ANIMATIONS */
+.animate-on-hover {
+  transition: all 0.3s ease;
+}
+
+.animate-on-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.scale-on-hover {
+  transition: transform 0.3s ease;
+}
+
+.scale-on-hover:hover {
+  transform: scale(1.05);
+}
+
+.glow-on-hover {
+  transition: box-shadow 0.3s ease;
+}
+
+.glow-on-hover:hover {
+  box-shadow: 0 0 15px rgba(74, 108, 247, 0.5);
+}
+
+/* MODERN UI ELEMENTS */
+.chapter-number-badge {
+  background: linear-gradient(135deg, #4a6cf7, #6e8ef9);
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(74, 108, 247, 0.3);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #2a4af7, #4a6cf7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #4a6cf7;
+}
+
+.heading-underline {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.heading-underline:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(to right, #4a6cf7, #6e8ef9);
+  transition: width 0.3s ease;
+}
+
+.heading-underline:hover:after {
+  width: 100px;
+}
+
+/* DARK MODE TOGGLE */
+.dark-mode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4a6cf7, #6e8ef9);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.dark-mode-toggle:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* DARK MODE STYLES */
+body.dark-mode {
+  background-color: #1a1a2e;
+  color: #f0f0f0;
+}
+
+body.dark-mode .card {
+  background-color: #252541;
+  border-color: #333355;
+}
+
+body.dark-mode .text-dark {
+  color: #f0f0f0 !important;
+}
+
+body.dark-mode .text-muted {
+  color: #aaaaaa !important;
+}
+
+body.dark-mode .btn-outline-dark {
+  color: #f0f0f0;
+  border-color: #f0f0f0;
+}
+
+body.dark-mode .btn-outline-dark:hover {
+  background-color: #f0f0f0;
+  color: #1a1a2e;
+}
+
+body.dark-mode .text-gradient {
+  background: linear-gradient(135deg, #6e8ef9, #9aabfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+body.dark-mode .heading-underline:after {
+  background: linear-gradient(to right, #6e8ef9, #9aabfa);
+}
+
+/* FLOATING ELEMENTS */
+.floating-action-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1000;
+}
+
+.chapter-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
+.chapter-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  transition: all 0.3s ease;
+}
+
+.chapter-dot.active {
+  background-color: #4a6cf7;
+  transform: scale(1.2);
+}
+
+.chapter-dot:hover {
+  background-color: #b0b0b0;
+}
+
+/* PROGRESS TRACKING */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5px;
+  background: transparent;
+  z-index: 1050;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #4a6cf7, #6e8ef9);
+  width: 0%;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 768px) {
+  .chapter-number-badge {
+    width: 50px;
+    height: 50px;
+    font-size: 1.25rem;
+  }
+  
+  .floating-action-button {
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .dark-mode-toggle {
+    bottom: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+  }
+}
