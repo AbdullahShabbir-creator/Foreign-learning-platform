@@ -48,7 +48,7 @@ const HeroSection = () => {
         <div className="shape shape-4"></div>
       </div>
 
-      <div className="container position-relative" style={{ zIndex: 1, paddingTop: "80px", paddingBottom: "80px" }}>
+      <div className="container position-relative" style={{ zIndex: 1, paddingTop: "8px", paddingBottom: "80px" }}>
         <div className="row align-items-center">
           {/* Left Side - Text Content */}
           <div className="col-lg-6 text-white mb-5 mb-lg-0">
@@ -74,7 +74,7 @@ const HeroSection = () => {
             <div className="d-flex flex-wrap gap-3 hero-animated" style={{ opacity: 0 }}>
               <button 
                 className="btn btn-lg btn-light text-primary shadow-lg" 
-                onClick={() => navigate("/signup")}
+                onClick={() => navigate("/")}
                 style={{ 
                   borderRadius: "var(--border-radius-full)",
                   fontWeight: "600",
@@ -90,14 +90,15 @@ const HeroSection = () => {
               
               <button 
                 className="btn btn-lg btn-outline" 
-                onClick={() => navigate("/login")}
+                onClick={() => navigate("/")}
                 style={{ 
                   borderRadius: "var(--border-radius-full)",
                   fontWeight: "600",
                   padding: "0.8rem 2rem",
                   color: "white",
                   borderColor: "white",
-                  transition: "all 0.3s ease"
+                  transition: "all 0.3s ease",
+                  display:"none"
                 }}
                 onMouseEnter={(e) => e.target.style.transform = "translateY(-5px)"}
                 onMouseLeave={(e) => e.target.style.transform = "translateY(0px)"}

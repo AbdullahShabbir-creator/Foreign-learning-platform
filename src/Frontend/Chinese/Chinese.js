@@ -10,7 +10,7 @@ const ChinesePage = () => {
 
   return (
     <div className="container-fluid p-0">
-      <div className="row g-0">
+      <div className="row g-0" style={{marginTop:"80px"}}>
         {/* Sidebar */}
         <div className="col-md-3 chinese-sidebar">
           <h4 className="text-primary mb-3">Chinese Chapters</h4>

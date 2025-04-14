@@ -242,13 +242,13 @@ const Navbar = () => {
                 </button>
                 <ul className="dropdown-menu dropdown-menu-end shadow border-0" style={{ borderRadius: "var(--border-radius-md)", overflow: "hidden" }}>
                   <li>
-                    <Link className="dropdown-item py-2" to="/profile">
-                      <i className="bi bi-person me-2"></i> My Profile
+                    <Link className="dropdown-item py-2" to="/dashboard/profile">
+                      <i className="bi bi-person me-2"></i> Profile
                     </Link>
                   </li>
                   <li>
-                    <Link className="dropdown-item py-2" to="/dashboard">
-                      <i className="bi bi-speedometer2 me-2"></i> Dashboard
+                    <Link className="dropdown-item py-2" to="/dashboard/progress">
+                      <i className="bi bi-graph-up me-2"></i> Progress
                     </Link>
                   </li>
                   <li>

@@ -16,6 +16,8 @@ import ResetPassword from './Frontend/Login/ResetPassword';
 import ChangePassword from './Frontend/Login/ChangePassword';
 import AdminDashboard from './Frontend/Admin/AdminDashboard';
 import Profile from './Frontend/Profile/Profile';
+import DashboardLayout from './Frontend/Dashboard/DashboardLayout';
+import DashboardProfile from './Frontend/Dashboard/DashboardProfile';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
@@ -81,6 +83,17 @@ function App() {
           <Route path="/change-password" element={<ChangePassword />} />
 
           {/* Protected Routes */}
+          <Route path="/dashboard" element={
+            <PrivateRoute>
+              <DashboardLayout>
+                <Routes>
+                  <Route path="profile" element={<DashboardProfile />} />
+                  <Route path="progress" element={<div>Progress Page</div>} />
+                </Routes>
+              </DashboardLayout>
+            </PrivateRoute>
+          } />
+
           <Route path="/profile" element={
             <PrivateRoute>
               <Profile />
