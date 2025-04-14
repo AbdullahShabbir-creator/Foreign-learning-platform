@@ -148,42 +148,6 @@ const Navbar = () => {
                     <i className="bi bi-grid-3x3-gap me-2"></i> All Tests
                   </a>
                 </li>
-                <li>
-                  <a 
-                    className={`dropdown-item py-2 ${isActive('/practice-tests/listening') ? 'active bg-light' : ''}`} 
-                    href="#"
-                    onClick={() => handleProtectedRoute('/practice-tests/listening')}
-                  >
-                    <i className="bi bi-headphones me-2"></i> Listening Test
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    className={`dropdown-item py-2 ${isActive('/practice-tests/reading') ? 'active bg-light' : ''}`} 
-                    href="#"
-                    onClick={() => handleProtectedRoute('/practice-tests/reading')}
-                  >
-                    <i className="bi bi-book me-2"></i> Reading Test
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    className={`dropdown-item py-2 ${isActive('/practice-tests/writing') ? 'active bg-light' : ''}`} 
-                    href="#"
-                    onClick={() => handleProtectedRoute('/practice-tests/writing')}
-                  >
-                    <i className="bi bi-pencil me-2"></i> Writing Test
-                  </a>
-                </li>
-                <li>
-                  <a 
-                    className={`dropdown-item py-2 ${isActive('/practice-tests/speaking') ? 'active bg-light' : ''}`} 
-                    href="#"
-                    onClick={() => handleProtectedRoute('/practice-tests/speaking')}
-                  >
-                    <i className="bi bi-mic me-2"></i> Speaking Test
-                  </a>
-                </li>
               </ul>
             </li>
 
