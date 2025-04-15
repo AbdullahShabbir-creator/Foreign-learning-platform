@@ -19,8 +19,12 @@ app.use(cors({
   credentials: true
 }));
 
+// Serve uploaded videos statically
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use('/api/courses', require('./routes/courseRoutes'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

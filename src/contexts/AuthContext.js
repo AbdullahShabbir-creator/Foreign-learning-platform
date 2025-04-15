@@ -7,10 +7,15 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem('token');
     return !!token;
   });
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    console.log("Token in AuthContext:", token ? "exists" : "missing");
+    
     if (token && !isAuthenticated) {
       setIsAuthenticated(true);
       // Fetch user profile when token exists
@@ -25,6 +30,8 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem('token');
       if (!token) return;
+      
+      console.log("Fetching profile with token...");
 
       const response = await fetch('http://localhost:5000/api/auth/profile', {
         headers: {
@@ -32,11 +39,17 @@ export const AuthProvider = ({ children }) => {
         }
       });
       
+      console.log("Profile response status:", response.status);
+      
       if (response.ok) {
         const data = await response.json();
+        console.log("Profile data received:", data);
         setUser(data.user);
+        // Update localStorage
+        localStorage.setItem('user', JSON.stringify(data.user));
       } else if (response.status === 401) {
         // Token expired or invalid
+        console.log("Token invalid or expired");
         localStorage.removeItem('token');
         setIsAuthenticated(false);
         setUser(null);
@@ -63,8 +76,11 @@ export const AuthProvider = ({ children }) => {
 
       if (response.ok) {
         localStorage.setItem('token', data.token);
+        // Save the user data to localStorage as well
+        localStorage.setItem('user', JSON.stringify(data.user));
         setIsAuthenticated(true);
         setUser(data.user);
+        console.log('Login successful, user data:', data.user); // Debug log
         
         // Check if we have an intended path
         const intendedPath = localStorage.getItem('intendedPath');
@@ -85,6 +101,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     setIsAuthenticated(false);
     setUser(null);
     window.location.href = '/login';

@@ -4,10 +4,13 @@ import { useAuth } from '../../contexts/AuthContext';
 import './DashboardLayout.css';
 
 const DashboardLayout = ({ children }) => {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
   const location = useLocation();
   const currentPath = location.pathname;
+  
+  console.log("User in DashboardLayout:", user); // Debug log
 
+  // Force display all menu items for debugging
   const menuItems = [
     {
       path: '/dashboard/profile',
@@ -23,6 +26,12 @@ const DashboardLayout = ({ children }) => {
       path: '/dashboard/settings',
       icon: 'bi-gear',
       label: 'Settings'
+    },
+    // Temporarily show for all users for debugging
+    {
+      path: '/dashboard/upload-course',
+      icon: 'bi-upload',
+      label: 'Upload Course'
     }
   ];
 

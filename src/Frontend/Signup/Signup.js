@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", password: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "user" });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
@@ -81,6 +82,20 @@ const Signup = () => {
               onChange={handleChange}
               required
             />
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Role</label>
+            <select
+              name="role"
+              className="form-control rounded-2"
+              value={formData.role}
+              onChange={handleChange}
+              required
+            >
+              <option value="user">User</option>
+              <option value="instructor">Instructor</option>
+              <option value="admin">Admin</option>
+            </select>
           </div>
           <button type="submit" className="btn btn-primary w-100 py-2 fw-bold rounded-2 shadow-sm">
             Sign Up
