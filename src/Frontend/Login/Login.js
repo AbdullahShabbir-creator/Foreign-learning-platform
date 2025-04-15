@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import "./Login.css";
+import { useAuth } from '../../contexts/AuthContext';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +9,7 @@ const Login = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,48 +17,21 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError("");
     
     try {
-      console.log("Attempting login with:", formData);
-      const response = await fetch("http://localhost:5000/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      
-      const data = await response.json();
-      console.log("Login response:", data);
-
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        
-        // Check if we have user data
-        if (data.user && data.user.role) {
-          console.log("User role:", data.user.role);
-          if (data.user.role === 'admin') {
-            alert("Admin login successful!");
-            navigate("/admin");
-          } else {
-            alert("Login successful!");
-            navigate("/");
-          }
-        } else {
-          console.error("No user role found in response:", data);
-          setError("Login successful but role information is missing");
-        }
-      } else {
-        setError(data.message || "Invalid email or password");
+      const success = await login(formData);
+      if (success) {
+        // The AuthContext will handle the redirect based on intended path
+        return;
       }
-    } catch (error) {
-      console.error("Login error:", error);
-      setError("An error occurred during login. Please check if the server is running.");
+    } catch (err) {
+      setError('Invalid credentials. Please try again.');
     }
   };
 
-  // Handle Cancel (Navigate to Home or another route)
   const handleCancel = () => {
-    navigate("/"); // Redirect to home or the desired page
+    navigate("/");
   };
 
   return (
@@ -66,7 +40,6 @@ const Login = () => {
         className="card shadow-lg p-4 border-0 rounded-3"
         style={{ maxWidth: "400px", width: "100%", marginTop: "20px" }}
       >
-        {/* Cancel Icon */}
         <button
           className="btn btn-link position-absolute top-0 end-0 m-3"
           style={{ fontSize: "20px", color: "#333" }}
@@ -102,19 +75,15 @@ const Login = () => {
               required
             />
           </div>
-          <button
-            type="submit"
-            className="btn btn-primary w-100 py-2 fw-bold rounded-2 shadow-sm"
-          >
-            Login
-          </button>
+          <div className="d-grid gap-2">
+            <button type="submit" className="btn btn-primary rounded-2">
+              <i className="bi bi-box-arrow-in-right me-1"></i> Login
+            </button>
+            <Link to="/signup" className="btn btn-outline-primary rounded-2">
+              <i className="bi bi-person-plus me-1"></i> Sign Up
+            </Link>
+          </div>
         </form>
-        <p className="text-center mt-3">
-          Don't have an account?{" "}
-          <Link to="/signup" className="text-decoration-none text-primary fw-semibold">
-            Sign Up
-          </Link>
-        </p>
       </div>
     </div>
   );
