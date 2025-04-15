@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import './UploadCourse.css';
 
 const UploadCourse = () => {
   const [form, setForm] = useState({
@@ -51,45 +52,32 @@ const UploadCourse = () => {
   };
 
   return (
-    <div className="dashboard-container">
+    <div className="upload-course-container">
       <h2>Upload a New Course</h2>
-      {message && <div className="alert alert-success">{message}</div>}
-      {error && <div className="alert alert-danger">{error}</div>}
-      <form className="dashboard-form" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="title"
-          placeholder="Course Title"
-          value={form.title}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Course Description"
-          value={form.description}
-          onChange={handleChange}
-          required
-        />
-        <select
-          name="language"
-          value={form.language}
-          onChange={handleChange}
-          required
-        >
-          <option value="IELTS">IELTS</option>
-          <option value="German">German</option>
-          <option value="Chinese">Chinese</option>
-        </select>
-        <input
-          type="file"
-          id="video-input"
-          name="video"
-          accept="video/*"
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Upload Course</button>
+      <form className="upload-course-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Title<span style={{color:'red'}}>*</span></label>
+          <input type="text" name="title" value={form.title} onChange={handleChange} required placeholder="Course Title" />
+        </div>
+        <div className="form-group">
+          <label>Description</label>
+          <textarea name="description" value={form.description} onChange={handleChange} placeholder="Course Description" rows={3} />
+        </div>
+        <div className="form-group">
+          <label>Language<span style={{color:'red'}}>*</span></label>
+          <select name="language" value={form.language} onChange={handleChange} required>
+            <option value="IELTS">IELTS</option>
+            <option value="German">German</option>
+            <option value="Chinese">Chinese</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label>Video File<span style={{color:'red'}}>*</span></label>
+          <input id="video-input" type="file" name="video" accept="video/*" onChange={handleChange} required />
+        </div>
+        <button className="upload-btn" type="submit">Upload Course</button>
+        {message && <p className="success-message">{message}</p>}
+        {error && <p className="error-message">{error}</p>}
       </form>
     </div>
   );

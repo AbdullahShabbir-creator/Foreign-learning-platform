@@ -1,0 +1,65 @@
+.instructor-profile-card {
+  max-width: 420px;
+  margin: 40px auto;
+  padding: 28px 30px 20px 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.profile-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 18px;
+  color: #007bff;
+}
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.profile-row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.profile-row label {
+  font-weight: 500;
+  color: #333;
+}
+.profile-row input, .profile-row textarea {
+  padding: 8px 10px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: #f7fafd;
+}
+.profile-row textarea {
+  min-height: 60px;
+  resize: vertical;
+}
+.profile-save-btn, .profile-edit-btn {
+  margin-top: 8px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.profile-edit-btn {
+  background: #28a745;
+}
+.profile-save-btn:disabled {
+  background: #a3c1f7;
+  cursor: not-allowed;
+}
+.profile-error {
+  color: #d32f2f;
+  margin-top: 6px;
+}
+.profile-success {
+  color: #28a745;
+  margin-top: 6px;
+}

@@ -207,8 +207,8 @@ const Navbar = () => {
                       </Link>
                     </li>
                     <li>
-                      <Link className="dropdown-item" to="/dashboard/progress">
-                        <i className="bi bi-graph-up me-2"></i> Progress
+                      <Link className="dropdown-item" to="/dashboard">
+                        <i className="bi bi-graph-up me-2"></i> Dashboard
                       </Link>
                     </li>
                     <li><hr className="dropdown-divider" /></li>
