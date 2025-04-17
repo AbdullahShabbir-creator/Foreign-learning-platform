@@ -37,7 +37,7 @@ const InstructorProfile = ({ user, onProfileComplete }) => {
 
   return (
     <div className="instructor-profile-card">
-      <h2 className="profile-title">Instructor Profile</h2>
+      <h2 className="profile-title">{user?.role === 'user' ? 'User Profile' : 'Instructor Profile'}</h2>
       <form className="profile-form" onSubmit={handleSubmit}>
         <div className="profile-row">
           <label>Name:</label>

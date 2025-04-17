@@ -19,6 +19,8 @@ import Profile from './Frontend/Profile/Profile';
 import DashboardLayout from './Frontend/Dashboard/DashboardLayout';
 import DashboardProfile from './Frontend/Dashboard/DashboardProfile';
 import UploadCourse from './Frontend/Dashboard/UploadCourse';
+import UserVideos from './Frontend/Dashboard/UserVideos';
+import VideoDetail from './Frontend/Dashboard/VideoDetail';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
@@ -82,6 +84,8 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/videos" element={<UserVideos />} />
+          <Route path="/videos/:id" element={<VideoDetail />} />
 
           {/* Protected Routes */}
           <Route path="/dashboard/*" element={

@@ -54,9 +54,9 @@ const Navbar = () => {
            zIndex: 1030
          }}>
       <div className="container">
-        <Link className={`navbar-brand fw-bold ${scrolled ? 'text-white' : 'text-gradient text-gradient-primary'}`} to="/" style={{ fontSize: "1.5rem" }}>
-          <i className="bi bi-globe2 me-2"></i>
-          <span style={{ fontFamily: "Poppins" }}>LinguaLeap</span>
+        <Link className={`navbar-brand fw-bold`} to="/" style={{ fontSize: "1.8rem" }}>
+          <i className="bi bi-globe2 me-2" style={{ color: "#4B006E" }}></i>
+          <span style={{ fontFamily: "Poppins", color: "#4B006E", fontWeight: 800, fontSize: "2.4rem" }}>FLLP</span>
         </Link>
 
         <button
@@ -149,6 +149,16 @@ const Navbar = () => {
                   </a>
                 </li>
               </ul>
+            </li>
+
+            <li className="nav-item mx-1">
+              <Link 
+                className={`nav-link px-3 py-2 ${isActive('/videos') ? 'active fw-semibold' : ''}`} 
+                to="/videos"
+                style={{ borderRadius: "var(--border-radius-md)" }}
+              >
+                <i className="bi bi-camera-video me-1"></i> Videos Lec
+              </Link>
             </li>
 
             <li className="nav-item mx-1">

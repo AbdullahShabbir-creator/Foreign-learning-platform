@@ -23,10 +23,30 @@ router.post('/', requireAuth, upload.single('video'), async (req, res) => {
     if (req.user.role !== 'instructor') {
       return res.status(403).json({ message: 'Only instructors can upload courses.' });
     }
+    
+    // Validate required fields
     const { title, description, language } = req.body;
+    if (!title || !language) {
+      return res.status(400).json({ message: 'Title and language are required.' });
+    }
+    
+    // Validate video file
     if (!req.file) {
       return res.status(400).json({ message: 'Video file is required.' });
     }
+    
+    // Validate video file type
+    const allowedTypes = ['video/mp4', 'video/webm', 'video/ogg'];
+    if (!allowedTypes.includes(req.file.mimetype)) {
+      return res.status(400).json({ message: 'Invalid video format. Only MP4, WebM, and OGG are supported.' });
+    }
+    
+    // Validate video size (max 500MB)
+    const maxSize = 500 * 1024 * 1024; // 500MB
+    if (req.file.size > maxSize) {
+      return res.status(400).json({ message: 'Video file is too large. Maximum size is 500MB.' });
+    }
+    
     const videoUrl = `/uploads/${req.file.filename}`;
     const course = new Course({
       title,
@@ -35,9 +55,21 @@ router.post('/', requireAuth, upload.single('video'), async (req, res) => {
       videoUrl,
       uploadedBy: req.user.id
     });
+    
     await course.save();
     res.status(201).json({ message: 'Course uploaded successfully', course });
   } catch (error) {
+    console.error('Upload error:', error);
+    
+    // Handle specific errors
+    if (error.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ message: 'Video file is too large. Maximum size is 500MB.' });
+    }
+    
+    if (error.code === 'LIMIT_FILE_TYPES') {
+      return res.status(400).json({ message: 'Invalid video format. Only MP4, WebM, and OGG are supported.' });
+    }
+    
     res.status(500).json({ message: 'Server error', error: error.message });
   }
 });
