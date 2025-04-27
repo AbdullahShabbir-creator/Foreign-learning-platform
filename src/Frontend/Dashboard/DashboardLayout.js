@@ -15,7 +15,6 @@ const DashboardLayout = ({ children }) => {
   const location = useLocation();
   const currentPath = location.pathname;
   
-  // Determine if user is an instructor based on role
   const isUser = user && user.role === 'user';
   const isInstructor = user && user.role === 'instructor';
 

@@ -23,12 +23,16 @@ import UserVideos from './Frontend/Dashboard/UserVideos';
 import VideoDetail from './Frontend/Dashboard/VideoDetail';
 import UploadContent from './Frontend/Dashboard/UploadContent';
 import Content from './Frontend/Dashboard/Content';
+import Progress from './Frontend/Dashboard/Progress';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
 import PracticeTestsIndex from './Frontend/PracticeTests/PracticeTestsIndex.js';
 import IELTSListeningTest from './Frontend/PracticeTests/IELTS/ListeningTest';
 import IELTSReadingTest from './Frontend/PracticeTests/IELTS/ReadingTest';
+import WritingTest from './Frontend/PracticeTests/WritingTest';
+import SpeakingTest from './Frontend/PracticeTests/SpeakingTest';
+// import IELTSSpeakingTest from './Frontend/PracticeTests/IELTS/SpeakingTest';
 import GermanTestsIndex from './Frontend/PracticeTests/GermanTestsIndex.js';
 import ChineseTestsIndex from './Frontend/PracticeTests/ChineseTestsIndex.js';
 import GermanListeningTest from './Frontend/PracticeTests/GermanListeningTest.js';
@@ -79,6 +83,8 @@ import Chapter8 from './Frontend/Chinese/Chapters/Chapter8';
 import Chapter9 from './Frontend/Chinese/Chapters/Chapter9';
 import Chapter10 from './Frontend/Chinese/Chapters/Chapter10';
 
+import ResultsPage from './Frontend/Results/ResultsPage';
+
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
   return isAuthenticated ? children : <Navigate to="/login" />;
@@ -107,7 +113,7 @@ function App() {
               <DashboardLayout>
                 <Routes>
                   <Route path="profile" element={<DashboardProfile />} />
-                  <Route path="progress" element={<div>Progress Page</div>} />
+                  <Route path="progress" element={<Progress />} />
                   <Route path="upload-course" element={<UploadCourse />} />
                 </Routes>
               </DashboardLayout>
@@ -298,31 +304,14 @@ function App() {
             } />
           </Route>
           
-          {/* Practice Tests Routes - Modernized and Expanded */}
-          <Route path="/practice-tests" element={
-            <PrivateRoute>
-              <PracticeTestsIndex />
-            </PrivateRoute>
-          } />
-          <Route path="/practice-tests/german" element={
-            <PrivateRoute>
-              <GermanTestsIndex />
-            </PrivateRoute>
-          } />
-          <Route path="/practice-tests/chinese" element={
-            <PrivateRoute>
-              <ChineseTestsIndex />
-            </PrivateRoute>
-          } />
-          <Route path="/practice-tests/select" element={
-            <PrivateRoute>
-              <PracticeTestSelect />
-            </PrivateRoute>
-          } />
-          {/* IELTS */}
-          <Route path="/practice-tests/ielts/listening" element={<IELTSListeningTest />} />
-          <Route path="/practice-tests/ielts/reading" element={<IELTSReadingTest />} />
-          {/* German Practice Test Modules */}
+          {/* Practice Tests */}
+          <Route path="/practice-tests" element={<PrivateRoute><PracticeTestsIndex /></PrivateRoute>} />
+          <Route path="/practice-tests/german" element={<PrivateRoute><GermanTestsIndex /></PrivateRoute>} />
+          <Route path="/practice-tests/chinese" element={<PrivateRoute><ChineseTestsIndex /></PrivateRoute>} />
+          <Route path="/practice-tests/ielts/listening" element={<PrivateRoute><IELTSListeningTest /></PrivateRoute>} />
+          <Route path="/practice-tests/ielts/reading" element={<PrivateRoute><IELTSReadingTest /></PrivateRoute>} />
+          <Route path="/practice-tests/ielts/writing" element={<PrivateRoute><WritingTest /></PrivateRoute>} />
+          <Route path="/practice-tests/ielts/speaking" element={<PrivateRoute><SpeakingTest /></PrivateRoute>} />
           <Route path="/practice-tests/german/listening" element={
             <PrivateRoute>
               <GermanListeningTest />
@@ -343,7 +332,6 @@ function App() {
               <GermanSpeakingTest />
             </PrivateRoute>
           } />
-          {/* Chinese Practice Test Modules */}
           <Route path="/practice-tests/chinese/reading" element={
             <PrivateRoute>
               <ChineseReadingTest />
@@ -365,6 +353,7 @@ function App() {
             </PrivateRoute>
           } />
           <Route path="/upload-content" element={<UploadContent />} />
+          <Route path="/results/:testType" element={<ResultsPage />} />
         </Routes>
       </div>
     </Router>

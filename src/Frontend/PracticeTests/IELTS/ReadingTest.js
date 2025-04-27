@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "../../../App.css";
 import "../../../index.css";
+import { useNavigate } from 'react-router-dom';
 
 const IELTSReadingTest = () => {
   const [currentSection, setCurrentSection] = useState(0);
   const [answers, setAnswers] = useState({});
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes in seconds
   const [hasStarted, setHasStarted] = useState(false);
+  const navigate = useNavigate();
 
   // Format time as MM:SS
   const formatTime = (seconds) => {
@@ -59,8 +61,17 @@ const IELTSReadingTest = () => {
       alert("Please answer at least one question.");
       return;
     }
-    
-    alert("Your answers have been submitted. You will receive feedback within 24-48 hours.");
+    // Calculate score
+    let correct = 0, total = 0;
+    readingSections.forEach(section => {
+      section.questions.forEach(q => {
+        total++;
+        const ans = answers[q.id];
+        if (q.type === 'multiple-choice' && q.options[ans]?.correct) correct++;
+        if (q.type === 'fill-in' && ans?.trim().toLowerCase() === q.correctAnswer.trim().toLowerCase()) correct++;
+      });
+    });
+    navigate('/results/reading', { state: { score: correct, total } });
   };
 
   // IELTS Reading test sections

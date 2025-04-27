@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/main.css";
 import "../styles/animations.css";
+import { useNavigate } from 'react-router-dom';
 
 const WritingTest = () => {
   const [currentTask, setCurrentTask] = useState(0);
@@ -8,6 +9,7 @@ const WritingTest = () => {
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60 minutes in seconds
   const [hasStarted, setHasStarted] = useState(false);
   const [wordCounts, setWordCounts] = useState({ 0: 0, 1: 0 });
+  const navigate = useNavigate();
 
   // Format time as MM:SS
   const formatTime = (seconds) => {
@@ -67,14 +69,11 @@ const WritingTest = () => {
 
   // Submit test
   const handleSubmit = () => {
-    // In a real application, this would send the essays to a server for grading
-    // For now, we'll just show a confirmation
-    if (wordCounts[0] < 150 || wordCounts[1] < 250) {
-      alert("Warning: One or both of your essays may be too short. Task 1 should be at least 150 words and Task 2 should be at least 250 words.");
-      return;
-    }
-    
-    alert("Your writing test has been submitted for evaluation. You would typically receive feedback within 24-48 hours.");
+    // Navigate to results with percentage score
+    const score1 = Math.min(wordCounts[0] / writingTasks[0].wordCount, 1);
+    const score2 = Math.min(wordCounts[1] / writingTasks[1].wordCount, 1);
+    const percentage = ((score1 + score2) / 2) * 100;
+    navigate('/results/writing', { state: { score: percentage.toFixed(2), total: 100 } });
   };
 
   // Writing tasks
