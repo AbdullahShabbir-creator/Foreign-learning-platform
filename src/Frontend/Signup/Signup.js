@@ -2,13 +2,26 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [formData, setFormData] = useState({ name: "", email: "", password: "", role: "user" });
+  const [formData, setFormData] = useState({ 
+    name: "", 
+    email: "", 
+    password: "", 
+    role: "user",
+    securityQuestions: {
+      securityQuestion: "",
+      securityAnswer: ""
+    }
+  });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    if (name === "securityQuestion" || name === "securityAnswer") {
+      setFormData({ ...formData, securityQuestions: { ...formData.securityQuestions, [name]: value } });
+    } else {
+      setFormData({ ...formData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -96,6 +109,35 @@ const Signup = () => {
               <option value="instructor">Instructor</option>
               <option value="admin">Admin</option>
             </select>
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Security Question</label>
+            <select
+              name="securityQuestion"
+              className="form-control rounded-2"
+              value={formData.securityQuestions.securityQuestion}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a security question</option>
+              <option value="What is your mother's maiden name?">What is your mother's maiden name?</option>
+              <option value="What was the name of your first pet?">What was the name of your first pet?</option>
+              <option value="What was the name of your elementary school?">What was the name of your elementary school?</option>
+              <option value="What is your favorite movie?">What is your favorite movie?</option>
+              <option value="In what city were you born?">In what city were you born?</option>
+            </select>
+          </div>
+          <div className="mb-3">
+            <label className="form-label fw-semibold">Security Answer</label>
+            <input
+              type="text"
+              name="securityAnswer"
+              className="form-control rounded-2"
+              placeholder="Enter your answer"
+              value={formData.securityQuestions.securityAnswer}
+              onChange={handleChange}
+              required
+            />
           </div>
           <button type="submit" className="btn btn-primary w-100 py-2 fw-bold rounded-2 shadow-sm">
             Sign Up

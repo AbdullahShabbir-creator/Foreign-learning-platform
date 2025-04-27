@@ -64,16 +64,19 @@ const Login = () => {
             />
           </div>
           <div className="mb-3">
-            <label className="form-label fw-semibold">Password</label>
+            <label htmlFor="password" className="form-label fw-semibold">Password</label>
             <input
               type="password"
-              name="password"
               className="form-control rounded-2"
-              placeholder="Enter your password"
+              id="password"
+              name="password"
               value={formData.password}
               onChange={handleChange}
               required
             />
+            <div className="text-end mt-1">
+              <Link to="/forgot-password" className="text-decoration-none small">Forgot password?</Link>
+            </div>
           </div>
           <div className="d-grid gap-2">
             <button type="submit" className="btn btn-primary rounded-2">

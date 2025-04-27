@@ -1,5 +1,15 @@
 const express = require("express");
-const { registerUser, loginUser, getAllUsers, deleteUser, updatePassword, changePasswordByEmail } = require("../controllers/authController");
+const { 
+  registerUser, 
+  loginUser, 
+  getAllUsers, 
+  deleteUser, 
+  updatePassword, 
+  changePasswordByEmail, 
+  verifySecurityQuestions, 
+  resetPassword,
+  resetPasswordByEmail
+} = require("../controllers/authController");
 const { requireAuth } = require("../middleware/authMiddleware");
 
 const router = express.Router();
@@ -8,6 +18,9 @@ const router = express.Router();
 router.post("/signup", registerUser);
 router.post("/login", loginUser);
 router.post("/change-password", changePasswordByEmail);
+router.post("/verify-security-questions", verifySecurityQuestions);
+router.post("/reset-password", resetPassword);
+router.post("/reset-password-by-email", resetPasswordByEmail);
 
 // Protected routes
 router.get("/profile", requireAuth, (req, res) => {

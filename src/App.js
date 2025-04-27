@@ -11,7 +11,7 @@ import Navbar from './Frontend/Navbar/Navbar';
 import HeroSection from './Frontend/Herosection/Herosection';
 import Login from './Frontend/Login/Login';
 import Signup from './Frontend/Signup/Signup';
-import ForgotPassword from './Frontend/Login/ForgotPassword';
+import ForgotPassword from './Frontend/Login/ForgotPassword.js';
 import ResetPassword from './Frontend/Login/ResetPassword';
 import ChangePassword from './Frontend/Login/ChangePassword';
 import AdminDashboard from './Frontend/Admin/AdminDashboard';
