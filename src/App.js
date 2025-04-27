@@ -21,11 +21,24 @@ import DashboardProfile from './Frontend/Dashboard/DashboardProfile';
 import UploadCourse from './Frontend/Dashboard/UploadCourse';
 import UserVideos from './Frontend/Dashboard/UserVideos';
 import VideoDetail from './Frontend/Dashboard/VideoDetail';
+import UploadContent from './Frontend/Dashboard/UploadContent';
+import Content from './Frontend/Dashboard/Content';
 
 // Practice Tests
 import PracticeTestSelect from './Frontend/PracticeTests/PracticeTestSelect';
+import PracticeTestsIndex from './Frontend/PracticeTests/PracticeTestsIndex.js';
 import IELTSListeningTest from './Frontend/PracticeTests/IELTS/ListeningTest';
 import IELTSReadingTest from './Frontend/PracticeTests/IELTS/ReadingTest';
+import GermanTestsIndex from './Frontend/PracticeTests/GermanTestsIndex.js';
+import ChineseTestsIndex from './Frontend/PracticeTests/ChineseTestsIndex.js';
+import GermanListeningTest from './Frontend/PracticeTests/GermanListeningTest.js';
+import GermanReadingTest from './Frontend/PracticeTests/GermanReadingTest.js';
+import GermanWritingTest from './Frontend/PracticeTests/GermanWritingTest.js';
+import GermanSpeakingTest from './Frontend/PracticeTests/GermanSpeakingTest.js';
+import ChineseReadingTest from './Frontend/PracticeTests/ChineseReadingTest.js';
+import ChineseListeningTest from './Frontend/PracticeTests/ChineseListeningTest.js';
+import ChineseWritingTest from './Frontend/PracticeTests/ChineseWritingTest.js';
+import ChineseSpeakingTest from './Frontend/PracticeTests/ChineseSpeakingTest.js';
 
 // IELTS Components
 import IeltsPage from './Frontend/IELTS/IELTS';
@@ -86,6 +99,7 @@ function App() {
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/videos" element={<UserVideos />} />
           <Route path="/videos/:id" element={<VideoDetail />} />
+          <Route path="/content" element={<Content />} />
 
           {/* Protected Routes */}
           <Route path="/dashboard/*" element={
@@ -284,23 +298,73 @@ function App() {
             } />
           </Route>
           
-          {/* Practice Tests Routes */}
+          {/* Practice Tests Routes - Modernized and Expanded */}
           <Route path="/practice-tests" element={
+            <PrivateRoute>
+              <PracticeTestsIndex />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/german" element={
+            <PrivateRoute>
+              <GermanTestsIndex />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/chinese" element={
+            <PrivateRoute>
+              <ChineseTestsIndex />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/select" element={
             <PrivateRoute>
               <PracticeTestSelect />
             </PrivateRoute>
-          }>
-            <Route path="ielts/listening" element={
-              <PrivateRoute>
-                <IELTSListeningTest />
-              </PrivateRoute>
-            } />
-            <Route path="ielts/reading" element={
-              <PrivateRoute>
-                <IELTSReadingTest />
-              </PrivateRoute>
-            } />
-          </Route>
+          } />
+          {/* IELTS */}
+          <Route path="/practice-tests/ielts/listening" element={<IELTSListeningTest />} />
+          <Route path="/practice-tests/ielts/reading" element={<IELTSReadingTest />} />
+          {/* German Practice Test Modules */}
+          <Route path="/practice-tests/german/listening" element={
+            <PrivateRoute>
+              <GermanListeningTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/german/reading" element={
+            <PrivateRoute>
+              <GermanReadingTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/german/writing" element={
+            <PrivateRoute>
+              <GermanWritingTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/german/speaking" element={
+            <PrivateRoute>
+              <GermanSpeakingTest />
+            </PrivateRoute>
+          } />
+          {/* Chinese Practice Test Modules */}
+          <Route path="/practice-tests/chinese/reading" element={
+            <PrivateRoute>
+              <ChineseReadingTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/chinese/listening" element={
+            <PrivateRoute>
+              <ChineseListeningTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/chinese/writing" element={
+            <PrivateRoute>
+              <ChineseWritingTest />
+            </PrivateRoute>
+          } />
+          <Route path="/practice-tests/chinese/speaking" element={
+            <PrivateRoute>
+              <ChineseSpeakingTest />
+            </PrivateRoute>
+          } />
+          <Route path="/upload-content" element={<UploadContent />} />
         </Routes>
       </div>
     </Router>

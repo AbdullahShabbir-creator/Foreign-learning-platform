@@ -310,4 +310,36 @@ body.dark-theme .form-control {
   background: var(--primary-dark);
 }
 
+/* --- FLLP Navbar: Force items to single line --- */
+.navbar .navbar-nav {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center;
+  justify-content: center;
+ 
+}
+
+.navbar .container,
+.navbar .navbar-collapse {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1190px !important;
+}
+
+@media (max-width: 991px) {
+  .navbar .navbar-nav {
+    flex-direction: column !important;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .navbar .container,
+  .navbar .navbar-collapse {
+    flex-direction: column !important;
+    align-items: stretch;
+  }
+}
+
 /* Add Inter and Poppins fonts via Google Fonts in index.html */

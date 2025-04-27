@@ -153,6 +153,16 @@ const Navbar = () => {
 
             <li className="nav-item mx-1">
               <Link 
+                className={`nav-link px-3 py-2 ${isActive('/content') ? 'active fw-semibold' : ''}`} 
+                to="/content"
+                style={{ borderRadius: "var(--border-radius-md)" }}
+              >
+                <i className="bi bi-file-earmark-pdf me-1"></i> PDF Resources
+              </Link>
+            </li>
+
+            <li className="nav-item mx-1">
+              <Link 
                 className={`nav-link px-3 py-2 ${isActive('/videos') ? 'active fw-semibold' : ''}`} 
                 to="/videos"
                 style={{ borderRadius: "var(--border-radius-md)" }}
@@ -161,15 +171,7 @@ const Navbar = () => {
               </Link>
             </li>
 
-            <li className="nav-item mx-1">
-              <Link 
-                className="nav-link px-3 py-2" 
-                to="/recommendations"
-                style={{ borderRadius: "var(--border-radius-md)" }}
-              >
-                <i className="bi bi-lightbulb me-1"></i> Recommendations
-              </Link>
-            </li>
+            {/* Recommendations link removed as requested */}
           </ul>
 
           <div className="d-flex mt-3 mt-lg-0">
@@ -221,6 +223,14 @@ const Navbar = () => {
                         <i className="bi bi-graph-up me-2"></i> Dashboard
                       </Link>
                     </li>
+                    {/* Instructor: Upload Content in profile dropdown */}
+                    {user && user.role === 'instructor' && (
+                      <li>
+                        <Link className="dropdown-item" to="/upload-content">
+                          <i className="bi bi-upload me-2"></i> Upload Content
+                        </Link>
+                      </li>
+                    )}
                     <li><hr className="dropdown-divider" /></li>
                     <li>
                       <button

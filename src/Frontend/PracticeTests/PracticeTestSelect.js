@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../App.css";
 import "../../index.css";
 
 const PracticeTestSelect = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(null);
   const [showLanguageTests, setShowLanguageTests] = useState(false);
+  const navigate = useNavigate();
 
   const languages = [
     {
@@ -71,13 +73,17 @@ const PracticeTestSelect = () => {
               <div 
                 key={lang.id} 
                 className="language-card animate-fade-in"
-                onClick={() => handleLanguageSelect(lang.name)}
-                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  if (lang.name === "IELTS") navigate("/practice-tests");
+                  else if (lang.name === "German") navigate("/practice-tests/german");
+                  else if (lang.name === "Chinese") navigate("/practice-tests/chinese");
+                }}
+                style={{ cursor: "pointer", color: "#111", fontWeight: 600 }}
               >
                 <div className="language-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mb-3">
                   <i className={`bi ${lang.icon} fs-3`} />
                 </div>
-                <h3 className="mb-2">{lang.name}</h3>
+                <h3 className="mb-2" style={{ color: "#111" }}>{lang.name}</h3>
                 <p className="text-muted">{lang.description}</p>
               </div>
             ))}
@@ -104,7 +110,7 @@ const PracticeTestSelect = () => {
                   <h4 className="mb-2">{test.name}</h4>
                   <button 
                     className="btn btn-primary w-100"
-                    onClick={() => window.location.href = test.path}
+                    onClick={() => navigate(test.path)}
                   >
                     开始测试
                   </button>

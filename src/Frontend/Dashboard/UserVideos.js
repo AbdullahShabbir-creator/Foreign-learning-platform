@@ -132,7 +132,7 @@ const UserVideos = () => {
                   <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
                     <h4 className="uservideos-video-title">{video.title}</h4>
                     <video width="100%" controls className="uservideos-video">
-                      <source src={video.videoUrl} type="video/mp4" />
+                      <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
                       Your browser does not support the video tag.
                     </video>
                     <p className="uservideos-description">{video.description}</p>
@@ -153,7 +153,7 @@ const UserVideos = () => {
                 <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
                   <h4 className="uservideos-video-title">{video.title}</h4>
                   <video width="100%" controls className="uservideos-video">
-                    <source src={video.videoUrl} type="video/mp4" />
+                    <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                   <p className="uservideos-description">{video.description}</p>
@@ -172,7 +172,7 @@ const UserVideos = () => {
             <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
               <h4 className="uservideos-video-title">{video.title}</h4>
               <video width="100%" controls className="uservideos-video">
-                <source src={video.videoUrl} type="video/mp4" />
+                <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
               </video>
               <p className="uservideos-description">{video.description}</p>
             </div>

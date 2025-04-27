@@ -19,11 +19,14 @@ app.use(cors({
   credentials: true
 }));
 
+// Serve PDF uploads as static files
+app.use('/uploads/pdfs', express.static(__dirname + '/uploads/pdfs'));
 
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use('/api/courses', require('./routes/courseRoutes'));
+app.use('/api/content', require('./routes/content'));
 
 // Error handling middleware
 app.use((err, req, res, next) => {

@@ -8,6 +8,7 @@ import InstructorProfile from './InstructorProfile';
 import UploadCourse from './UploadCourse';
 import Progress from './Progress';
 import UserVideos from './UserVideos';
+import UploadContent from './UploadContent';
 
 const DashboardLayout = ({ children }) => {
   const { logout, user } = useAuth();
@@ -61,6 +62,11 @@ const DashboardLayout = ({ children }) => {
                 </span>
               </li>
             )}
+            {isInstructor && (
+              <li className={activeSection === 'uploadcontent' ? 'active' : ''} onClick={() => setActiveSection('uploadcontent')}>
+                <span className="nav-link"><i className="bi bi-file-earmark-plus me-2"></i>Upload Content</span>
+              </li>
+            )}
             <li>
               <button className="nav-link logout-btn" onClick={logout}>
                 <i className="bi bi-box-arrow-right me-2"></i>Logout
@@ -80,6 +86,7 @@ const DashboardLayout = ({ children }) => {
         {isInstructor && activeSection === 'mycourses' && <MyCourses showPlaylists={true} />}
         {isInstructor && activeSection === 'uploadcourse' && <UploadCourse />}
         {isInstructor && activeSection === 'playlists' && <Playlists />}
+        {isInstructor && activeSection === 'uploadcontent' && <UploadContent />}
       </main>
     </div>
   );
