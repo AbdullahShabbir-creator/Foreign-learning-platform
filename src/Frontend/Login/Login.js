@@ -82,6 +82,9 @@ const Login = () => {
             <Link to="/signup" className="btn btn-outline-primary rounded-2">
               <i className="bi bi-person-plus me-1"></i> Sign Up
             </Link>
+            <Link to="/change-password" className="btn btn-link mt-2 p-0" style={{fontSize:'1rem'}}>
+              <i className="bi bi-key me-1"></i> Change/Update Password
+            </Link>
           </div>
         </form>
       </div>

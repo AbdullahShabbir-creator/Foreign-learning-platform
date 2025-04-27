@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -23,14 +24,37 @@ const ChangePassword = () => {
     }
 
     try {
-      // TODO: Implement actual API call to change password
-      // For now, we'll just show a success message
-      setMessage('Password changed successfully!');
-      setTimeout(() => {
-        navigate('/profile'); // Redirect to user's profile page
-      }, 2000);
+      const response = await fetch('http://localhost:50001/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          currentPassword,
+          newPassword
+        })
+      });
+
+      const data = await response.json();
+      
+      if (response.ok) {
+        setMessage(data.message || 'Password changed successfully!');
+        // Clear form fields
+        setEmail('');
+        setCurrentPassword('');
+        setNewPassword('');
+        setConfirmPassword('');
+        
+        setTimeout(() => {
+          navigate('/login'); // Redirect to login page to login with new password
+        }, 2000);
+      } else {
+        setError(data.message || 'Failed to change password');
+      }
     } catch (err) {
       setError('Failed to change password. Please try again.');
+      console.error(err);
     } finally {
       setIsLoading(false);
     }
@@ -46,7 +70,7 @@ const ChangePassword = () => {
         
         <div className="text-center mb-4">
           <h1 className="h3 mb-3 fw-normal">Change Password</h1>
-          <p className="text-muted">Enter your current and new password to update your account.</p>
+          <p className="text-muted">Enter your email, current and new password to update your account.</p>
         </div>
 
         {message && (
@@ -57,6 +81,20 @@ const ChangePassword = () => {
         )}
 
         <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label htmlFor="email" className="form-label">Email</label>
+            <input
+              type="email"
+              className="form-control"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={isLoading}
+              placeholder="Enter email"
+            />
+          </div>
+
           <div className="mb-3">
             <label htmlFor="currentPassword" className="form-label">Current Password</label>
             <input
