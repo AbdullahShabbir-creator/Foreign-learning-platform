@@ -33,7 +33,7 @@ const Content = () => {
       {loading && <p>Loading...</p>}
       {error && <p className="error-message">{error}</p>}
       {!loading && !error && contents.length === 0 && <p>No PDF content found.</p>}
-      <div style={{marginTop: 24}}>
+      <div style={{marginTop: 24}} className="text-center">
         {contents.map((item, idx) => (
           <div key={idx} className="form-group" style={{marginBottom: 32, background: '#f8fafc', borderRadius: 12, padding: 22, boxShadow: '0 2px 14px rgba(0,0,0,0.07)'}}>
             <h4 style={{marginBottom: 8, fontWeight: 600}}><i className="bi bi-file-earmark-pdf me-2 text-danger"></i>{item.title}</h4>
@@ -43,19 +43,13 @@ const Content = () => {
               href={item.pdfUrl.startsWith('/uploads/') ? `http://localhost:5000${item.pdfUrl}` : item.pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-danger"
+              className="btn btn-danger text-center"
               download
               style={{ marginRight: 12 }}
             >
               <i className="bi bi-file-earmark-arrow-down me-1"></i> Download PDF
             </a>
-            <button
-              className="btn btn-primary"
-              onClick={() => window.open(item.pdfUrl.startsWith('/uploads/') ? `http://localhost:5000${item.pdfUrl}` : item.pdfUrl, '_blank')}
-              style={{ marginLeft: 0 }}
-            >
-              <i className="bi bi-eye me-1"></i> Preview PDF
-            </button>
+           
           </div>
         ))}
       </div>
