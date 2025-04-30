@@ -24,7 +24,7 @@ const ForgotPassword = () => {
     
     try {
       // First, just check if the email exists
-      const response = await fetch('http://localhost:50001/api/auth/login', {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -61,35 +61,19 @@ const ForgotPassword = () => {
     setError('');
     
     try {
-      // For now, we'll simulate a successful verification
-      // In a real implementation, this would call the verify-security-questions endpoint
-      
-      // Generate a temporary token (this would normally come from the server)
-      const tempToken = "temp-" + Math.random().toString(36).substring(2, 15);
-      setResetToken(tempToken);
-      setStep(3);
-      
-      /* Uncomment this when the backend endpoint is working
-      const response = await fetch('http://localhost:50001/api/auth/verify-security-questions', {
+      // Call verify-security-questions endpoint
+      const verifyRes = await fetch('http://localhost:5000/api/auth/verify-security-questions', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email,
-          securityQuestions: securityAnswers
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, securityQuestions: securityAnswers })
       });
-      
-      const data = await response.json();
-      
-      if (response.ok) {
-        setResetToken(data.resetToken);
+      const verifyData = await verifyRes.json();
+      if (verifyRes.ok) {
+        setResetToken(verifyData.resetToken);
         setStep(3);
       } else {
-        setError(data.message || 'Security answers do not match our records.');
+        setError(verifyData.message || 'Security answers do not match our records.');
       }
-      */
     } catch (err) {
       setError('An error occurred. Please try again.');
       console.error(err);
@@ -111,8 +95,8 @@ const ForgotPassword = () => {
     }
     
     try {
-      // Use our new reset-password-by-email endpoint
-      const response = await fetch('http://localhost:50001/api/auth/reset-password-by-email', {
+      // Use our reset-password-by-email endpoint
+      const response = await fetch('http://localhost:5000/api/auth/reset-password-by-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
