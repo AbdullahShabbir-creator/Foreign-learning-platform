@@ -20,13 +20,11 @@ const Login = () => {
     setError("");
     
     try {
-      const success = await login(formData);
-      if (success) {
-        // The AuthContext will handle the redirect based on intended path
-        return;
-      }
+      await login(formData);
+      navigate('/admin');
     } catch (err) {
-      setError('Invalid credentials. Please try again.');
+      setError(err.message || 'Invalid credentials. Please try again.');
+      setFormData({ ...formData, password: "" }); // Clear password field on error
     }
   };
 
