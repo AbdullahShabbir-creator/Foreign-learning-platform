@@ -27,9 +27,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use('/api/courses', require('./routes/courseRoutes'));
 app.use('/api/content', require('./routes/content'));
-
+app.use('/api/video-reports', require('./routes/VideoReport'));
+app.use('/api/feedback', require('./routes/Feedback'))
+app.use('/api/instructors', require('./routes/Instructor'));
+app.use('/api/student', require('./routes/Student'));
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res, next) => {  
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong!", error: err.message });
 });
@@ -45,7 +48,7 @@ const PORT = process.env.PORT || 5000;
 const startServer = (port) => {
   try {
     const server = app.listen(port, () => {
-      console.log(`🚀 Server running on port ${port}`);
+      console.log(`🚀 Server running on port which is good ${port}`);
     });
 
     // Handle server errors
@@ -56,7 +59,7 @@ const startServer = (port) => {
       } else {
         console.error('❌ Server error:', error);
       }
-    });
+    });   
 
     // Handle unhandled promise rejections
     process.on('unhandledRejection', (err) => {

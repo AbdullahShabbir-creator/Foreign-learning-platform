@@ -18,6 +18,7 @@ const IeltsPage = () => {
   const chapters = Array.from({ length: 10 }, (_, i) => `Chapter ${i + 1}`);
 
   return (
+    <div className="out">
     <div className="container-fluid p-0">
       <div className="row g-0">
         {/* Sidebar */}
@@ -45,6 +46,7 @@ const IeltsPage = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

@@ -89,7 +89,7 @@ const UploadContent = () => {
           <label>PDF File<span style={{color:'red'}}>*</span></label>
           <input id="pdf-input-content" type="file" name="pdf" accept="application/pdf" onChange={handleChange} required />
         </div>
-        <button className="upload-btn" type="submit">Upload Content</button>
+        <button className="upload-btn" type="submit" >Upload Content</button>
         {message && <p className="success-message">{message}</p>}
         {error && <p className="error-message">{error}</p>}
       </form>

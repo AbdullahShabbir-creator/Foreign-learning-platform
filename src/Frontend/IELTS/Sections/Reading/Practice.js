@@ -16,7 +16,7 @@ const ReadingPractice = () => {
       physical activity have a lower risk of developing heart disease, diabetes, and certain types of cancer.
       Additionally, exercise has been proven to reduce stress levels and improve cognitive function.
       The World Health Organization recommends at least 150 minutes of moderate-intensity aerobic 
-      physical activity throughout the week for adults aged 18-64.",
+      physical activity throughout the week for adults aged 18-64.`,
       questions: [
         {
           id: 1,
@@ -53,12 +53,7 @@ const ReadingPractice = () => {
     {
       id: 2,
       title: "The Impact of Technology on Communication",
-      text: `The rapid advancement of technology has significantly transformed the way we communicate. 
-      Social media platforms have made it easier than ever to connect with people around the world. 
-      However, this convenience comes with its own set of challenges. A study by the University of California 
-      found that while social media can enhance social connections, it can also lead to feelings of isolation 
-      and decreased face-to-face interactions. The study suggests that a balanced approach to technology 
-      use is essential for maintaining healthy relationships and mental well-being.",
+      text: "The rapid advancement of technology has significantly transformed the way we communicate Social media platforms have made it easier than ever to connect with people around the world. However, this convenience comes with its own set of challenges. A study by the University of California found that while social media can enhance social connections, it can also lead to feelings of isolation and decreased face-to-face interactions. The study suggests that a balanced approach to technology use is essential for maintaining healthy relationships and mental well-being",
       questions: [
         {
           id: 4,
@@ -124,7 +119,7 @@ const ReadingPractice = () => {
     <div className="practice-test">
       <div className="test-header">
         <h2 className="text-primary mb-4">IELTS Reading Practice Test</h2>
-        <p className="lead mb-4">Test your reading comprehension skills with these practice passages.</p>
+        <p className="lead mb-4">Test your reading comprehension skills with these prkljlkjactice passages.</p>
       </div>
 
       {!showResults ? (

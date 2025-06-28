@@ -1,68 +1,185 @@
+/* Root and Global */
+:root {
+  --primary: #4361ee;
+  --primary-dark: #3f37c9;
+  --secondary: #4cc9f0;
+  --accent: #f72585;
+  --success: #4ade80;
+  --danger: #f43f5e;
+  --warning: #fbbf24;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --white: #ffffff;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-700: #374151;
+  --gray-800: #1f2937;
+
+  --border-radius: 8px;
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+.delete-btn {
+  background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+  color: #fff;
+  padding: 0.4rem 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  display: inline-block;
+}
+
+.delete-btn:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
+  transform: translateY(-2px);
+}
+
+
+/* Dashboard Container */
 .admin-dashboard {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background: var(--light);
+  min-height: 100vh;
 }
 
 .admin-dashboard h2 {
-  color: #333;
-  margin-bottom: 2rem;
   font-size: 2rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .users-list {
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: var(--white);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  overflow-x: auto;
 }
 
 .users-list h3 {
-  color: #444;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--dark);
 }
 
-table {
+/* Table Styles */
+.users-list table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  min-width: 700px;
 }
 
-th, td {
-  padding: 1rem;
+.users-list thead {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+}
+
+.users-list th,
+.users-list td {
+  padding: 0.75rem 1rem;
   text-align: left;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--gray-200);
 }
 
-th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: #333;
+.users-list th {
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
 }
 
-tr:hover {
-  background-color: #f8f9fa;
+.users-list tbody tr {
+  transition: background 0.3s ease;
 }
 
+.users-list tbody tr:hover {
+  background: var(--gray-100);
+}
+
+.users-list td {
+  font-size: 0.95rem;
+  color: var(--gray-800);
+}
+
+/* Delete Button */
 .delete-btn {
-  background-color: #dc3545;
-  color: white;
+  background: linear-gradient(135deg, var(--danger) 0%, #b91c1c 100%);
+  color: var(--white);
+  padding: 0.4rem 0.75rem;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   cursor: pointer;
-  transition: background-color 0.3s;
+  font-size: 0.85rem;
+  font-weight: 600;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .delete-btn:hover {
-  background-color: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #b91c1c 0%, #7f1d1d 100%);
 }
 
+/* Error Message */
 .admin-error {
-  color: #dc3545;
   padding: 1rem;
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+  color: var(--white);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  max-width: 600px;
+  margin: 2rem auto;
   text-align: center;
-  margin-top: 2rem;
-  background-color: #f8d7da;
+}
+
+/* Scrollbar Styling */
+.users-list::-webkit-scrollbar {
+  height: 8px;
+}
+
+.users-list::-webkit-scrollbar-thumb {
+  background: var(--primary);
   border-radius: 4px;
+}
+
+.users-list::-webkit-scrollbar-track {
+  background: var(--gray-200);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-dashboard {
+    padding: 1rem;
+  }
+
+  .users-list {
+    padding: 1rem;
+  }
+
+  .users-list table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-dashboard h2 {
+    font-size: 1.5rem;
+  }
+
+  .users-list h3 {
+    font-size: 1.1rem;
+  }
+
+  .delete-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+  }
 }

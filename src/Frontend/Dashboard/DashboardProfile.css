@@ -108,7 +108,7 @@
   height: 8px;
   background: var(--border-color);
   border-radius: 4px;
-  overflow: hidden;
+  
 }
 
 .progress-bar {

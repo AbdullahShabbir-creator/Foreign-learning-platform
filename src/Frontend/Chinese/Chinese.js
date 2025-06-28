@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
-import '../styles/main.css';
+
 import './ChinesePage.css';
 
 const ChinesePage = () => {
@@ -9,6 +9,7 @@ const ChinesePage = () => {
   const chapters = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
+    <div className="out">
     <div className="container-fluid p-0">
       <div className="row g-0" style={{marginTop:"80px"}}>
         {/* Sidebar */}
@@ -46,6 +47,7 @@ const ChinesePage = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

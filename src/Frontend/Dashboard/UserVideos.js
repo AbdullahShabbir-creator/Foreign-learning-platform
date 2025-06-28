@@ -1,32 +1,56 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useNavigate } from 'react-router-dom';
-import './UserVideos.css';
+import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthContext';
+import "./UserVideos.css";
 
 const FIXED_CATEGORIES = [
-  { value: 'all', label: 'All Categories' },
-  { value: 'IELTS', label: 'IELTS' },
-  { value: 'German', label: 'German' },
-  { value: 'Chinese', label: 'Chinese' },
+  { value: "all", label: "All Categories" },
+  { value: "IELTS", label: "IELTS" },
+  { value: "German", label: "German" },
+  { value: "Chinese", label: "Chinese" },
 ];
 
 const UserVideos = () => {
+  const [viewMode, setViewMode] = useState("courses");
   const [videos, setVideos] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [feedbackText, setFeedbackText] = useState("");
+  const [feedbackRating, setFeedbackRating] = useState(5);
+
   const searchRef = useRef();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/courses")
-      .then(res => res.json())
-      .then(data => {
-        setVideos(data);
-        setLoading(false);
+    fetchData();
+  }, [viewMode]);
+
+  const fetchData = async () => {
+    setLoading(true);
+    if (viewMode === "courses") {
+      const res = await fetch("http://localhost:5000/api/courses");
+      const data = await res.json();
+      setVideos(data);
+    } else {
+      const token = localStorage.getItem("token");
+      const res = await fetch("http://localhost:5000/api/courses/playlists", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        }
       });
-  }, []);
+      const data = await res.json();
+      setPlaylists(data);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (search.trim().length === 0) {
@@ -35,29 +59,29 @@ const UserVideos = () => {
       return;
     }
     const lower = search.toLowerCase();
-    // Suggest video titles and categories starting with the search string
-    const titleSuggestions = videos
-      .map(v => v.title)
-      .filter(title => title.toLowerCase().startsWith(lower));
+    const titleSuggestions =
+      viewMode === "courses"
+        ? videos.map(v => v.title).filter(title => title.toLowerCase().startsWith(lower))
+        : playlists.map(p => p.title).filter(title => title.toLowerCase().startsWith(lower));
+
     const categorySuggestions = FIXED_CATEGORIES
-      .filter(cat => cat.value !== 'all')
+      .filter(cat => cat.value !== "all")
       .map(cat => cat.label)
       .filter(label => label.toLowerCase().startsWith(lower));
-    // Remove duplicates and limit to 7 suggestions
+
     const unique = Array.from(new Set([...titleSuggestions, ...categorySuggestions])).slice(0, 7);
     setSuggestions(unique);
     setShowSuggestions(unique.length > 0);
-  }, [search, videos]);
+  }, [search, videos, playlists, viewMode]);
 
-  // Hide suggestions if clicked outside
   useEffect(() => {
     const handleClick = (e) => {
       if (searchRef.current && !searchRef.current.contains(e.target)) {
         setShowSuggestions(false);
       }
     };
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
   }, []);
 
   const handleSuggestionClick = (s) => {
@@ -65,120 +89,173 @@ const UserVideos = () => {
     setShowSuggestions(false);
   };
 
-  const handleVideoClick = (video) => {
-    navigate(`/videos/${video._id}`);
+  const handleReportClick = (video) => {
+    const videoPath = video.videoUrl.startsWith("/uploads/") ? video.videoUrl : null;
+    const courseId = video._id;
+    navigate("/report-video", { state: { videoPath, courseId } });
   };
 
-  if (loading) return <div className="uservideos-loading">Loading...</div>;
+  const handleFeedbackClick = (video) => {
+    setSelectedCourse(video);
+    setFeedbackText("");
+    setFeedbackRating(5);
+    setShowFeedbackModal(true);
+  };
 
-  const categories = FIXED_CATEGORIES;
+  const submitFeedback = async () => {
+    if (!isAuthenticated) {
+      alert("You must be logged in to give feedback");
+      return;
+    }
 
-  const filteredVideos = videos.filter(video => {
+    const token = localStorage.getItem("token");
+
+    const res = await fetch("http://localhost:5000/api/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        courseId: selectedCourse._id,
+        comment: feedbackText,
+        rating: feedbackRating
+      })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert("Feedback submitted successfully!");
+      setShowFeedbackModal(false);
+    } else {
+      alert(data.message || "Failed to submit feedback");
+    }
+  };
+
+  const filteredCourses = videos.filter((video) => {
     const matchesSearch =
       video.title.toLowerCase().includes(search.toLowerCase()) ||
       (video.description && video.description.toLowerCase().includes(search.toLowerCase()));
-    const videoCategory = (video.language || video.category || '').toLowerCase();
-    const selectedCategory = category.toLowerCase();
-    const matchesCategory = category === "all" || videoCategory === selectedCategory;
+    const videoCategory = (video.language || video.category || "").toLowerCase();
+    const matchesCategory = category === "all" || videoCategory === category.toLowerCase();
     return matchesSearch && matchesCategory;
   });
 
-  const groupedVideos = {};
-  FIXED_CATEGORIES.filter(cat => cat.value !== 'all').forEach(cat => {
-    groupedVideos[cat.label] = filteredVideos.filter(
-      video => (video.language || video.category || '').toLowerCase() === cat.value.toLowerCase()
-    );
-  });
-
-  const recommended = [...filteredVideos].slice(-3);
+  const filteredPlaylists = playlists.filter((playlist) =>
+    playlist.title.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
-    <div className="uservideos-root">
+    <div className="out">
+    <div className="uservideos-root" style={{overflowY:'auto !important' }}>
+      <div className="uservideos-toggle">
+        <button className={viewMode === "courses" ? "active" : ""} onClick={() => setViewMode("courses")}>Courses</button>
+        <button className={viewMode === "playlists" ? "active" : ""} onClick={() => setViewMode("playlists")}>Playlists</button>
+      </div>
+
       <div className="uservideos-searchbar" ref={searchRef}>
         <input
           type="text"
-          placeholder="Search videos..."
+          placeholder={`Search ${viewMode}...`}
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           className="uservideos-input"
           onFocus={() => setShowSuggestions(suggestions.length > 0)}
           autoComplete="off"
         />
-        <select
-          value={category}
-          onChange={e => setCategory(e.target.value)}
-          className="uservideos-select"
-        >
-          {categories.map(cat => (
-            <option key={cat.value} value={cat.value}>{cat.label}</option>
-          ))}
-        </select>
-        {showSuggestions && suggestions.length > 0 && (
+        {viewMode === "courses" && (
+          <select value={category} onChange={(e) => setCategory(e.target.value)} className="uservideos-select">
+            {FIXED_CATEGORIES.map((cat) => (
+              <option key={cat.value} value={cat.value}>{cat.label}</option>
+            ))}
+          </select>
+        )}
+        {showSuggestions && (
           <ul className="uservideos-suggestions">
-            {suggestions.map((sug, idx) => (
-              <li key={idx} onClick={() => handleSuggestionClick(sug)}>{sug}</li>
+            {suggestions.map((s, idx) => (
+              <li key={idx} onClick={() => handleSuggestionClick(s)}>{s}</li>
             ))}
           </ul>
         )}
       </div>
-      <h2 className="uservideos-title">All Videos</h2>
-      {category === 'all' ? (
-        FIXED_CATEGORIES.filter(cat => cat.value !== 'all').map(cat => (
-          groupedVideos[cat.label] && groupedVideos[cat.label].length > 0 && (
-            <div key={cat.value} className="uservideos-category-block">
-              <h3 className="uservideos-category-title">{cat.label}</h3>
-              <div className="uservideos-row">
-                {groupedVideos[cat.label].map(video => (
-                  <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
-                    <h4 className="uservideos-video-title">{video.title}</h4>
-                    <video width="100%" controls className="uservideos-video">
-                      <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
-                    <p className="uservideos-description">{video.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )
-        ))
-      ) : (
-        filteredVideos.length === 0 ? (
-          <div className="uservideos-novideos">No videos found.</div>
+
+      {loading ? (
+        <div className="uservideos-loading">Loading...</div>
+      ) : viewMode === "courses" ? (
+        filteredCourses.length === 0 ? (
+          <div className="uservideos-novideos">No courses found.</div>
         ) : (
-          <div className="uservideos-category-block">
-            <h3 className="uservideos-category-title">{categories.find(c => c.value === category)?.label}</h3>
-            <div className="uservideos-row">
-              {filteredVideos.map(video => (
-                <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
-                  <h4 className="uservideos-video-title">{video.title}</h4>
-                  <video width="100%" controls className="uservideos-video">
-                    <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                  <p className="uservideos-description">{video.description}</p>
-                </div>
-              ))}
-            </div>
+          <div className="uservideos-grid">
+            {filteredCourses.map((video) => (
+              <div key={video._id} className="uservideos-card">
+                <h4>{video.title}</h4>
+                <video width="100%" controls>
+                  <source
+                    src={
+                      video.videoUrl.startsWith("/uploads/")
+                        ? `http://localhost:5000${video.videoUrl}`
+                        : video.videoUrl
+                    }
+                    type="video/mp4"
+                  />
+                </video>
+                <p>{video.description}</p>
+                <button onClick={() => handleReportClick(video)}>🚩 Report</button>
+                <button onClick={() => handleFeedbackClick(video)}>💬 Feedback</button>
+              </div>
+            ))}
           </div>
         )
-      )}
-      <h2 className="uservideos-title">Recommended</h2>
-      <div className="uservideos-row">
-        {recommended.length === 0 ? (
-          <div className="uservideos-novideos">No recommended videos found.</div>
-        ) : (
-          recommended.map(video => (
-            <div key={video._id} className="uservideos-card" onClick={() => handleVideoClick(video)}>
-              <h4 className="uservideos-video-title">{video.title}</h4>
-              <video width="100%" controls className="uservideos-video">
-                <source src={video.videoUrl.startsWith('/uploads/') ? `http://localhost:5000${video.videoUrl}` : video.videoUrl} type="video/mp4" />
-              </video>
-              <p className="uservideos-description">{video.description}</p>
+      ) : filteredPlaylists.length === 0 ? (
+        <div className="uservideos-novideos">No playlists found.</div>
+      ) : (
+        <div className="uservideos-grid">
+          {filteredPlaylists.map((playlist) => (
+            <div key={playlist._id} className="uservideos-card">
+              <h4>{playlist.title}</h4>
+              <ul className="playlist-videos-list">
+                {playlist.videos.map((vid) => (
+                  <li key={vid._id}>
+                    {vid.videoTitle}
+                    <button
+                      onClick={() =>
+                        window.open(`http://localhost:5000${vid.videoUrl}`, "_blank")
+                      }
+                    >
+                      ▶ Open
+                    </button>
+                  </li>
+                ))}
+              </ul>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {showFeedbackModal && (
+        <div className="feedback-modal">
+          <div className="feedback-modal-content">
+            <h3>Give Feedback for {selectedCourse?.title}</h3>
+            <textarea
+              rows="4"
+              placeholder="Write your feedback..."
+              value={feedbackText}
+              onChange={(e) => setFeedbackText(e.target.value)}
+            />
+            <div>
+              <label>Rating: </label>
+              <select value={feedbackRating} onChange={(e) => setFeedbackRating(Number(e.target.value))}>
+                {[5, 4, 3, 2, 1].map((num) => (
+                  <option key={num} value={num}>{num} Star{num > 1 ? "s" : ""}</option>
+                ))}
+              </select>
+            </div>
+            <button onClick={submitFeedback}>Submit</button>
+            <button onClick={() => setShowFeedbackModal(false)}>Cancel</button>
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 };

@@ -62,42 +62,58 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (credentials) => {
-    try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(credentials)
-      });
-      const data = await response.json();
+ const login = async (credentials) => {
+  try {
+    const response = await fetch('http://localhost:5000/api/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify(credentials)
+    });
+    const data = await response.json();
 
-      if (response.ok) {
-        localStorage.setItem('token', data.token);
-        // Save the user data to localStorage as well
-        localStorage.setItem('user', JSON.stringify(data.user));
-        setIsAuthenticated(true);
-        setUser(data.user);
-        console.log('Login successful, user data:', data.user); // Debug log
-        
-        // Check if we have an intended path
-        const intendedPath = localStorage.getItem('intendedPath');
-        if (intendedPath) {
-          localStorage.removeItem('intendedPath');
-          window.location.href = intendedPath;
-        } else {
-          window.location.href = '/';
+    if (response.ok) {
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('user', JSON.stringify(data.user));
+      setIsAuthenticated(true);
+      setUser(data.user);
+      console.log('Login successful, user data:', data.user);
+
+      const intendedPath = localStorage.getItem('intendedPath');
+      console.log(data.user)
+      if (intendedPath) {
+        localStorage.removeItem('intendedPath');
+        window.location.href = intendedPath;
+      } else {
+        // Dynamically redirect based on role
+        switch (data.user.role) {
+          case 'admin':
+            window.location.href = '/admin';
+            break;
+          case 'instructor':
+          
+            window.location.href = '/dashboard';
+            break;
+          case 'student':
+            window.location.href = '/';
+            break;
+          default:
+            window.location.href = '/';
+            break;
         }
-        return true;
       }
-      return false;
-    } catch (error) {
-      console.error('Login error:', error);
-      return false;
+
+      return true;
     }
-  };
+
+    return false;
+  } catch (error) {
+    console.error('Login error:', error);
+    return false;
+  }
+};
 
   const logout = () => {
     localStorage.removeItem('token');
@@ -112,7 +128,8 @@ export const AuthProvider = ({ children }) => {
       isAuthenticated,
       user,
       login,
-      logout
+      logout,
+       fetchProfile 
     }}>
       {children}
     </AuthContext.Provider>

@@ -23,7 +23,7 @@ const DashboardLayout = ({ children }) => {
   const [activeSection, setActiveSection] = React.useState(defaultSection);
 
   return (
-    <div className="dashboard-container">
+    <div className="dashboard-container" style={{ marginTop: -90, padding: 0 }}>
       <aside className="dashboard-sidebar">
         <div className="sidebar-header">
           <h4>Dashboard</h4>

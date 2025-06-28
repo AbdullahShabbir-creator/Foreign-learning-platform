@@ -1,6 +1,6 @@
+import './index.css'
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/main.css";
 import "../styles/animations.css";
 
 const PracticeTestsIndex = () => {
@@ -45,6 +45,7 @@ const PracticeTestsIndex = () => {
   ];
 
   return (
+    <div className="out">
     <div className="practice-tests-container animate-fade-in" style={{ marginTop: "80px" }}>
       {/* Header section with wave background */}
       <div className="position-relative overflow-hidden bg-gradient-primary text-white py-5 mb-5">
@@ -204,6 +205,7 @@ const PracticeTestsIndex = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

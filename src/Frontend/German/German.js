@@ -9,6 +9,7 @@ const GermanPage = () => {
   const chapters = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
+    <div className="out">
     <div className="container-fluid p-0m-5">
       <div className="row german-class g-0">
         {/* Sidebar */}
@@ -46,6 +47,7 @@ const GermanPage = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

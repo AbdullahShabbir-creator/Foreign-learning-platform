@@ -50,9 +50,10 @@ const Signup = () => {
   };
 
   return (
-    <div className="d-flex signup justify-content-center align-items-center vh-100 bg-light">
-      <div className="card shadow-lg p-4 border-0 rounded-3 signup"
-       style={{ maxWidth: "400px", width: "100%", marginTop: "100px"  }}>
+<div className="d-flex justify-content-center align-items-center bg-light" style={{ minHeight: '100vh' }}>
+ <div className="card shadow-lg p-4 border-0 rounded-3 signup-card"
+    style={{ maxWidth: "800px", width: "100%", maxHeight: "90vh", overflowY: "auto" }}>
+
         <button
           className="btn btn-close position-absolute top-0 end-0 m-3"
           onClick={handleClose}

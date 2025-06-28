@@ -8,7 +8,8 @@ const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
-
+ 
+console.log(user)
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 50) {
@@ -51,8 +52,13 @@ const Navbar = () => {
          style={{ 
            transition: "all 0.3s ease",
            padding: scrolled ? "0.5rem 0" : "1rem 0",
-           zIndex: 1030
+           zIndex: 1030,
+           background: "linear-gradient(135deg, #4361ee 0%, #3a0ca3 50%, #7209b7 100%)",
+           height:'70px',
+           marginBottom:'100px'
+        
          }}>
+          <div style={{ height: '900px' }}></div>
       <div className="container">
         <Link className={`navbar-brand fw-bold`} to="/" style={{ fontSize: "1.8rem" }}>
           <i className="bi bi-globe2 me-2" style={{ color: "#4B006E" }}></i>
@@ -214,15 +220,11 @@ const Navbar = () => {
                   </button>
                   <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
                     <li>
-                      <Link className="dropdown-item" to="/dashboard/profile">
+                      <Link className="dropdown-item" to="/student/profile">
                         <i className="bi bi-person me-2"></i> Profile
                       </Link>
                     </li>
-                    <li>
-                      <Link className="dropdown-item" to="/dashboard">
-                        <i className="bi bi-graph-up me-2"></i> Dashboard
-                      </Link>
-                    </li>
+                    
                     {/* Instructor: Upload Content in profile dropdown */}
                     {user && user.role === 'instructor' && (
                       <li>

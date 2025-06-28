@@ -57,7 +57,12 @@
   cursor: pointer;
   margin-top: 10px;
   transition: background 0.2s;
+
+  display: flex;                /* NEW: make button flex container */
+  justify-content: center;      /* center horizontally */
+  align-items: center;          /* center vertically */
 }
+
 .upload-btn:hover {
   background: linear-gradient(90deg, #367be2 0%, #2696d6 100%);
 }

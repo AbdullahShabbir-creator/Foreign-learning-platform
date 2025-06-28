@@ -46,4 +46,29 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+// DELETE /api/content/:id
+router.delete('/:id', async (req, res) => {
+  try {
+    const content = await Content.findById(req.params.id);
+    if (!content) {
+      return res.status(404).json({ message: 'Content not found' });
+    }
+
+    // Delete the PDF file from disk
+    const filePath = path.join(__dirname, '../', content.pdfUrl);
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+
+    // Remove from database
+    await Content.findByIdAndDelete(req.params.id);
+
+    res.json({ message: 'PDF content deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting content:', err);
+    res.status(500).json({ message: 'Server error while deleting content' });
+  }
+});
+
 module.exports = router;

@@ -22,16 +22,21 @@ router.post("/verify-security-questions", verifySecurityQuestions);
 router.post("/reset-password", resetPassword);
 router.post("/reset-password-by-email", resetPasswordByEmail);
 
-// Protected routes
 router.get("/profile", requireAuth, (req, res) => {
-  res.json({
-    user: {
-      id: req.user.id,
-      name: req.user.name,
-      email: req.user.email,
-      role: req.user.role
-    }
-  });
+  const user = {
+    id: req.user.id,
+    name: req.user.name,
+    email: req.user.email,
+    role: req.user.role
+  };
+
+  // Include optional fields if they exist
+  if (req.user.mobile) user.mobile = req.user.mobile;
+  if (req.user.address) user.address = req.user.address;
+  if (req.user.about) user.about = req.user.about;
+  console.log(user)
+
+  res.json({ user });
 });
 
 // Update password (protected)

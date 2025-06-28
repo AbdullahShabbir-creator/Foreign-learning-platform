@@ -44,6 +44,7 @@ const ChineseTestsIndex = () => {
   ];
 
   return (
+     <div className="out">
     <div className="practice-tests-container animate-fade-in" style={{ marginTop: "80px" }}>
       {/* Header section with wave background */}
       <div className="position-relative overflow-hidden bg-gradient-primary text-white py-5 mb-5">
@@ -198,6 +199,7 @@ const ChineseTestsIndex = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

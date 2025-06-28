@@ -1,37 +1,79 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../contexts/AuthContext';  // adjust if path differs
 import './Profile.css';
 
-const Profile = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState('');
+const StudentProfile = () => {
+  const { user, fetchProfile } = useAuth();
   const navigate = useNavigate();
 
+  const [form, setForm] = useState({
+    name: user?.name || "",
+    email: user?.email || "",
+    mobile: user?.mobile || "",
+    address: user?.address || "",
+    about: user?.about || ""
+  });
+
+  const [editing, setEditing] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+
+  // Sync form when user updates
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      navigate('/login');
+    setForm({
+      name: user?.name || "",
+      email: user?.email || "",
+      mobile: user?.mobile || "",
+      address: user?.address || "",
+      about: user?.about || ""
+    });
+  }, [user]);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+
+    if (!form.name || !form.mobile || !form.address) {
+      setError("Name, mobile, and address are required.");
       return;
     }
 
-    // Get user profile from backend
-    fetch('http://localhost:5000/api/auth/profile', {
-      headers: {
-        'Authorization': `Bearer ${token}`
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/api/student/${user.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({
+          name: form.name,
+          mobile: form.mobile,
+          address: form.address,
+          about: form.about
+        })
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData.message || 'Failed to update profile');
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.user) {
-        setUser(data.user);
-      } else {
-        setError('Failed to load profile');
-      }
-    })
-    .catch(err => {
-      setError('Error loading profile');
-    });
-  }, [navigate]);
+
+      await res.json();
+      await fetchProfile();  // Refresh context + localStorage
+
+      setSuccess('Profile updated successfully!');
+      setEditing(false);
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
   if (!user) {
     return (
@@ -42,39 +84,92 @@ const Profile = () => {
   }
 
   return (
+    <div className='out'>
     <div className="profile-container">
       <div className="profile-card">
         <div className="profile-header">
-          <div className="profile-avatar">
-            <i className="bi bi-person-circle"></i>
-          </div>
+         
           <div className="profile-info">
-            <h2>{user.name}</h2>
+            {editing ? (
+              <input
+                name="name"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
+            ) : (
+              <h2>{user.name}</h2>
+            )}
             <p className="profile-email">{user.email}</p>
-            <p className="profile-role">{user.role === 'admin' ? 'Administrator' : 'Student'}</p>
+            <p className="profile-role">
+              {user.role === 'admin' ? 'Administrator' : user.role === 'instructor' ? 'Instructor' : 'Student'}
+            </p>
           </div>
         </div>
 
         <div className="profile-content">
-          <div className="progress-section">
-            <h3>Learning Progress</h3>
-            <div className="progress-bar-container">
-              <div className="progress-bar" style={{ width: '50%' }}></div>
-            </div>
-            <p className="progress-text">50% Complete</p>
-          </div>
+          {editing && (
+            <>
+              <div className="profile-row">
+                <label>Mobile:</label>
+                <input
+                  name="mobile"
+                  value={form.mobile}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="profile-row">
+                <label>Address:</label>
+                <input
+                  name="address"
+                  value={form.address}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="profile-row">
+                <label>About:</label>
+                <textarea
+                  name="about"
+                  value={form.about}
+                  onChange={handleChange}
+                />
+              </div>
+            </>
+          )}
+
+        
+
+          {error && <div className="profile-error">{error}</div>}
+          {success && <div className="profile-success">{success}</div>}
 
           <div className="profile-actions">
-            <button className="btn btn-primary">Edit Profile</button>
-            <button className="btn btn-secondary" onClick={() => {
-              localStorage.removeItem('token');
-              navigate('/login');
-            }}>Logout</button>
+            {editing ? (
+              <button className="btn btn-primary" onClick={handleSubmit}>
+                Save
+              </button>
+            ) : (
+              <button className="btn btn-primary" onClick={() => setEditing(true)}>
+                Edit Profile
+              </button>
+            )}
+            <button
+              className="btn btn-secondary"
+              onClick={() => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                navigate('/login');
+              }}
+            >
+              Logout
+            </button>
           </div>
         </div>
       </div>
     </div>
+    </div>
   );
 };
 
-export default Profile;
+export default StudentProfile;

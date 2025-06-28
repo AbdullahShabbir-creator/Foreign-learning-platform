@@ -9,7 +9,11 @@ const UserSchema = new mongoose.Schema({
   securityQuestions: {
     securityQuestion: { type: String },
     securityAnswer: { type: String }
-  }
+  },
+  // Optional fields for instructor
+  about: { type: String,default:'' },
+  mobile: { type: String,default:''  },
+  address: { type: String,default:''  }
 }, { timestamps: true });
 
 // Hash password before saving

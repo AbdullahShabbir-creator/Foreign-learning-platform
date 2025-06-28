@@ -28,7 +28,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="hero-section position-relative overflow-hidden" style={{ minHeight: "100vh", paddingTop: "80px" }}>
+    <section className="hero-section position-relative overflow-hidden" style={{ minHeight: "100vh", paddingTop: "100px" }}>
       {/* Background gradient animation */}
       <div 
         className="hero-bg-gradient position-absolute top-0 start-0 w-100 h-100" 
