@@ -17,7 +17,19 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage: storage });
-
+router.get('/playlists', requireAuth, async (req, res) => {
+  try {
+   /* if (req.user.role !== 'instructor') {
+      return res.status(403).json({ message: 'Only instructors can view playlists.' });
+    }*/
+   console.log('playlist')
+    const playlists = await Playlist.find();
+    res.json(playlists);
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 // POST /api/courses - Instructor uploads a course
 router.post('/', requireAuth, upload.single('video'), async (req, res) => {
   try {
@@ -120,17 +132,7 @@ router.post('/playlists', requireAuth, async (req, res) => {
 });
 
 // Get all playlists for instructor
-router.get('/playlists', requireAuth, async (req, res) => {
-  try {
-   /* if (req.user.role !== 'instructor') {
-      return res.status(403).json({ message: 'Only instructors can view playlists.' });
-    }*/
-    const playlists = await Playlist.find({ instructor: req.user.id });
-    res.json(playlists);
-  } catch (error) {
-    res.status(500).json({ message: 'Server error', error: error.message });
-  }
-});
+
 
 // Update playlist videos
 router.put('/playlists/:playlistId', requireAuth, async (req, res) => {

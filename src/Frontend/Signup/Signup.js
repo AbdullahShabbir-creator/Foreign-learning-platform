@@ -6,7 +6,7 @@ const Signup = () => {
     name: "", 
     email: "", 
     password: "", 
-    role: "user",
+    role: "student",
     securityQuestions: {
       securityQuestion: "",
       securityAnswer: ""
@@ -106,7 +106,7 @@ const Signup = () => {
               onChange={handleChange}
               required
             >
-              <option value="user">User</option>
+              <option value="student">Student</option>
               <option value="instructor">Instructor</option>
             </select>
           </div>

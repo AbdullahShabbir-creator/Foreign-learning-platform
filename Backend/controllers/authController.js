@@ -12,9 +12,9 @@ exports.registerUser = async (req, res) => {
     }
 
     // Validate and set role
-    const validRoles = ['user', 'instructor'];
+    const validRoles = ['student', 'instructor'];
     if (!validRoles.includes(role)) {
-      role = 'user'; // Default to user if invalid role
+      role = 'student'; // Default to user if invalid role
     }
 
     // Create new user

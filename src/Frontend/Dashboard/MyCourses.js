@@ -95,7 +95,7 @@ const MyCourses = ({ showPlaylists }) => {
                 <td>{course.language}</td>
                 <td>
                   <video width="200" controls>
-                    <source src={course.videoUrl} type="video/mp4" />
+                    <source src={`http://localhost:5000${course.videoUrl}`} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </td>

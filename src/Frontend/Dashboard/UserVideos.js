@@ -47,6 +47,7 @@ const UserVideos = () => {
         }
       });
       const data = await res.json();
+      console.log(data)
       setPlaylists(data);
     }
     setLoading(false);
@@ -90,6 +91,7 @@ const UserVideos = () => {
   };
 
   const handleReportClick = (video) => {
+    console.log(video)
     const videoPath = video.videoUrl.startsWith("/uploads/") ? video.videoUrl : null;
     const courseId = video._id;
     navigate("/report-video", { state: { videoPath, courseId } });

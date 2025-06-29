@@ -41,7 +41,7 @@ const AdminSidebar = () => {
           </li>
           <li className={location.pathname === '/admin/dashboard' ? 'active' : ''}>
             <Link to="/admin/dashboard" className="nav-link">
-              <i className="bi bi-speedometer2 me-2"></i> Dashboard
+              <i className="bi bi-speedometer2 me-2"></i> Users
             </Link>
           </li>
           <li>
