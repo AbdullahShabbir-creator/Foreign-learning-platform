@@ -15,6 +15,7 @@ import VideoDetail from '../Frontend/Dashboard/VideoDetail';
 import Content from '../Frontend/Dashboard/Content';
 import ReportVideo from '../Frontend/Report/Report';
 import StudentProfile from '../Frontend/Profile/Profile';
+import ProgressPage from '../Frontend/Progress/Progress';
 
 // Wrapper for routes that require student role
 const PrivateStudentRoute = ({ children }) => {
@@ -74,6 +75,15 @@ export const publicRoutes = [
     element={
       <PrivateStudentRoute>
         <ReportVideo />
+      </PrivateStudentRoute>
+    }
+  />,
+   <Route
+    key="/progress"
+    path="/progress"
+    element={
+      <PrivateStudentRoute>
+        <ProgressPage />
       </PrivateStudentRoute>
     }
   />,

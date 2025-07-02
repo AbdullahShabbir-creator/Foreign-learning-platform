@@ -103,7 +103,7 @@ const UploadContent = () => {
           <div key={idx} className="form-group" style={{marginBottom: 32, background: '#f8fafc', borderRadius: 8, padding: 18, boxShadow: '0 1px 6px rgba(0,0,0,0.04)'}}>
             <h4 style={{marginBottom: 8}}><i className="bi bi-file-earmark-pdf me-2 text-danger"></i>{item.title}</h4>
             <p style={{marginBottom: 10, color: '#444'}}>{item.description}</p>
-            <a href={item.pdfUrl} target="_blank" rel="noopener noreferrer" className="btn btn-danger">
+            <a href={`http://localhost:5000${item.pdfUrl}`} target="_blank" rel="noopener noreferrer" className="btn btn-danger">
               <i className="bi bi-file-earmark-arrow-down me-1"></i> View/Download PDF
             </a>
           </div>

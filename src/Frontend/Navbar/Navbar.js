@@ -224,6 +224,11 @@ console.log(user)
                         <i className="bi bi-person me-2"></i> Profile
                       </Link>
                     </li>
+                      <li>
+                      <Link className="dropdown-item" to="/progress">
+                        <i className="bi bi-person me-2"></i> Progress
+                      </Link>
+                    </li>
                     
                     {/* Instructor: Upload Content in profile dropdown */}
                     {user && user.role === 'instructor' && (

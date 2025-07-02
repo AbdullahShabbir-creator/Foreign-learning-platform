@@ -1,0 +1,67 @@
+[
+  {
+    "audio": "/audios/german/german-1.mp3",
+    "text":"Erneuerbare Energien spielen eine immer größere Rolle in der globalen Energieversorgung. Besonders in Deutschland hat sich der Anteil von Solar- und Windkraft in den letzten Jahren stark erhöht. Durch das Abschalten von Atomkraftwerken und die Reduzierung von Kohlekraftwerken wächst die Bedeutung nachhaltiger Energiequellen. Viele Haushalte installieren mittlerweile Solaranlagen auf ihren Dächern, um Stromkosten zu sparen und zur Energiewende beizutragen. Auch Unternehmen investieren in erneuerbare Technologien, um ihre CO₂-Bilanz zu verbessern. Trotz großer Fortschritte gibt es Herausforderungen: Die Speicherung von Energie und der Ausbau der Stromnetze müssen weiterentwickelt werden. Dennoch gilt Deutschland als Vorreiter im Bereich der grünen Energiepolitik.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Warum nimmt die Bedeutung erneuerbarer Energien in Deutschland zu?" },
+      { "id": 2, "type": "fill-in", "question": "Welche zwei Energiequellen werden im Text als besonders wachsend erwähnt?" },
+      { "id": 3, "type": "fill-in", "question": "Was motiviert viele Haushalte, Solaranlagen zu installieren?" },
+      { "id": 4, "type": "fill-in", "question": "Inwiefern profitieren Unternehmen von Investitionen in erneuerbare Technologien?" },
+      { "id": 5, "type": "fill-in", "question": "Welche zwei Herausforderungen bei der Nutzung erneuerbarer Energien werden genannt?" },
+      { "id": 6, "type": "fill-in", "question": "Welche Rolle spielt Deutschland im globalen Kontext der grünen Energiepolitik?" },
+      { "id": 7, "type": "fill-in", "question": "Was wird im Text unter dem Begriff „Energiewende“ verstanden?" }
+    ]
+  },
+  {
+    "audio": "/audios/german/german-2.mp3",
+    "text":"Das Bildungssystem in Deutschland unterscheidet sich stark von dem anderer Länder. Nach der Grundschule, die vier Jahre dauert, werden die Schüler in verschiedene weiterführende Schulformen eingeteilt: Hauptschule, Realschule oder Gymnasium. Diese Entscheidung wird meist auf Grundlage der schulischen Leistungen getroffen und beeinflusst die spätere berufliche Laufbahn. Während die Hauptschule auf handwerkliche Berufe vorbereitet, ermöglicht das Gymnasium den Zugang zur Universität. In den letzten Jahren wurde auch die Gesamtschule eingeführt, die alle Bildungswege vereint. Kritiker bemängeln jedoch, dass das System zu früh selektiert und soziale Ungleichheiten verstärkt. Dennoch bleibt Bildung ein zentrales Thema in der deutschen Gesellschaft.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Wie lange dauert die Grundschule in Deutschland?" },
+      { "id": 2, "type": "fill-in", "question": "Welche drei Schulformen gibt es nach der Grundschule?" },
+      { "id": 3, "type": "fill-in", "question": "Wovon hängt die Schulform-Empfehlung in der Regel ab?" },
+      { "id": 4, "type": "fill-in", "question": "Was ist das Hauptziel der Hauptschule laut dem Text?" },
+      { "id": 5, "type": "fill-in", "question": "Was ermöglicht der Abschluss des Gymnasiums?" },
+      { "id": 6, "type": "fill-in", "question": "Was kritisieren manche Menschen am deutschen Schulsystem?" },
+      { "id": 7, "type": "fill-in", "question": "Welche neue Schulform kombiniert alle Bildungsgänge?" }
+    ]
+  },
+  {
+    "audio": "/audios/german/german-3.mp3",
+    "text":"Der Schwarzwald ist eine der bekanntesten und beliebtesten Tourismusregionen Deutschlands. Mit seinen dichten Wäldern, traditionellen Dörfern und malerischen Landschaften zieht er jedes Jahr Millionen von Besuchern an. Besonders beliebt sind Wandern, Radfahren und der Besuch von Kuckucksuhren-Manufakturen. Auch im Winter ist der Schwarzwald ein attraktives Reiseziel, denn viele Orte bieten Skisport und Winterwanderungen an. Die Region ist bekannt für ihre Gastfreundschaft, Schwarzwälder Kirschtorte und Thermalbäder. Nachhaltiger Tourismus gewinnt ebenfalls an Bedeutung, um die Natur zu schützen. Viele Hotels setzen auf umweltfreundliche Konzepte und regionale Produkte. Der Schwarzwald bleibt ein ideales Ziel für Erholungssuchende und Naturliebhaber.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Warum ist der Schwarzwald ein beliebtes Reiseziel?" },
+      { "id": 2, "type": "fill-in", "question": "Nenne zwei typische Aktivitäten, die Touristen im Sommer dort unternehmen." },
+      { "id": 3, "type": "fill-in", "question": "Was bietet der Schwarzwald im Winter für Besucher an?" },
+      { "id": 4, "type": "fill-in", "question": "Welche drei Dinge sind besonders typisch für die Region laut dem Text?" },
+      { "id": 5, "type": "fill-in", "question": "Was bedeutet nachhaltiger Tourismus im Kontext des Schwarzwalds?" },
+      { "id": 6, "type": "fill-in", "question": "Wie tragen Hotels zum Umweltschutz bei?" },
+      { "id": 7, "type": "fill-in", "question": "Für welche Zielgruppe ist der Schwarzwald besonders attraktiv?" }
+    ]
+  },
+  {
+    "audio": "/audios/german/german-4.mp3",
+    "text":"Die deutsche Küche ist regional sehr vielfältig und spiegelt die kulturellen Unterschiede innerhalb des Landes wider. In Bayern ist das Frühstück ohne Brezn und Weißwurst kaum vorstellbar, während im Norden Fischgerichte dominieren. Typische Gerichte wie Sauerkraut, Bratwurst oder Schweinshaxe sind weltweit bekannt. Auch Brot spielt eine wichtige Rolle – Deutschland bietet über 300 Brotsorten an. In den letzten Jahrzehnten haben auch internationale Einflüsse die Essgewohnheiten verändert. Döner, Pizza und Sushi gehören inzwischen zum Alltag. Gleichzeitig steigt das Interesse an vegetarischer und veganer Ernährung. Ernährung in Deutschland ist heute ein Mix aus Tradition, Vielfalt und modernen Trends.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Wie unterscheidet sich das Frühstück in Bayern von anderen Regionen?" },
+      { "id": 2, "type": "fill-in", "question": "Welche typischen Gerichte aus Deutschland werden im Text genannt?" },
+      { "id": 3, "type": "fill-in", "question": "Welche besondere Rolle spielt Brot in der deutschen Küche?" },
+      { "id": 4, "type": "fill-in", "question": "Welche drei internationalen Gerichte sind heute in Deutschland weit verbreitet?" },
+      { "id": 5, "type": "fill-in", "question": "Wie hat sich die deutsche Esskultur in den letzten Jahrzehnten verändert?" },
+      { "id": 6, "type": "fill-in", "question": "Was zeigt der Trend zu vegetarischer und veganer Ernährung in Deutschland?" },
+      { "id": 7, "type": "fill-in", "question": "Wie lässt sich die heutige deutsche Esskultur laut dem Text zusammenfassen?" }
+    ]
+  },
+  {
+    "audio": "/audios/german/german-5.mp3",
+    "text":"In Deutschland hat das Umweltbewusstsein in den letzten Jahren stark zugenommen. Viele Menschen achten darauf, Müll zu trennen, Energie zu sparen und umweltfreundliche Verkehrsmittel zu nutzen. Besonders das Fahrrad und der öffentliche Nahverkehr werden gefördert. Plastiktüten wurden in vielen Geschäften abgeschafft, und Mehrwegverpackungen sind auf dem Vormarsch. Auch Schulen und Unternehmen engagieren sich zunehmend für Nachhaltigkeit. Umweltbewegungen wie „Fridays for Future“ haben großen Einfluss auf die Politik genommen. Trotzdem gibt es noch viele Herausforderungen, etwa im Bereich Klimaschutz oder beim Konsumverhalten. Dennoch zeigt sich ein klarer Trend: Umweltschutz ist in der Mitte der Gesellschaft angekommen.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "In welchen drei Bereichen achten viele Deutsche auf Umweltschutz?" },
+      { "id": 2, "type": "fill-in", "question": "Welche zwei Verkehrsmittel werden besonders gefördert?" },
+      { "id": 3, "type": "fill-in", "question": "Welche Maßnahme gegen Plastik wird im Text erwähnt?" },
+      { "id": 4, "type": "fill-in", "question": "Was machen viele Schulen und Unternehmen im Bereich Umweltschutz?" },
+      { "id": 5, "type": "fill-in", "question": "Welche Jugendbewegung hat Einfluss auf die Umweltpolitik genommen?" },
+      { "id": 6, "type": "fill-in", "question": "Welche zwei Herausforderungen werden trotz Fortschritte genannt?" },
+      { "id": 7, "type": "fill-in", "question": "Was zeigt der Text über die gesellschaftliche Einstellung zum Umweltschutz?" }
+    ]
+  }
+]

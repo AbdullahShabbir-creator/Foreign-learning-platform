@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const apiKey = 'AIzaSyBL6eXROyGEEDmz-Hc698oMkG-oybj1y-w';
+const apiKey = 'AIzaSyAYoxtpsKd1Y01lu1nAMXYAfRyUi-wmaxE';
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel({
@@ -15,7 +15,6 @@ const generationConfig = {
   responseMimeType: "text/plain",
 };
 
-// Start a chat session
 export const startChatSession = () => {
   return model.startChat({
     generationConfig,
@@ -23,17 +22,21 @@ export const startChatSession = () => {
   });
 };
 
-// General function that takes a prompt
-export const runPrompt = async (prompt) => {
+// ✅ parseJson = false for plain paragraph response (like AI review)
+export const runPrompt = async (prompt, parseJson = true) => {
   const chatSession = startChatSession();
   try {
     const result = await chatSession.sendMessage(prompt);
     let text = result.response.text();
 
-    // Remove ```json wrapping if present
     text = text.replace(/```json|```/g, "").trim();
 
-    return JSON.parse(text);
+    if (parseJson) {
+      return JSON.parse(text);
+    } else {
+      return text; // ⬅️ Return plain paragraph directly
+    }
+
   } catch (error) {
     console.error("AI generation failed:", error);
     throw new Error("Failed to generate content");

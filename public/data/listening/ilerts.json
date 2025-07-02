@@ -1,0 +1,67 @@
+[
+  {
+    "audio": "/audios/ilerts/ilerts-1-ev.mp3",
+    "text":"Over the past decade, electric vehicles (EVs) have experienced a significant rise in popularity, driven largely by advancements in battery technology and a global push toward reducing carbon emissions. Countries like Norway and China have led the transition, offering incentives to consumers and investing heavily in charging infrastructure. Traditional car manufacturers, such as Ford and Volkswagen, have also shifted their production lines to include electric models, while newer companies like Tesla have built their entire brand around electric mobility. The environmental benefits are notable, with EVs producing zero tailpipe emissions and being more energy-efficient than gasoline-powered cars. However, challenges remain, including the high cost of batteries, limited driving range in some models, and the environmental impact of lithium mining. Nevertheless, governments and industries continue to work on sustainable solutions to make EVs more accessible and eco-friendly in the long term.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "What are two main reasons behind the rise in popularity of electric vehicles?" },
+      { "id": 2, "type": "fill-in", "question": "Which countries are mentioned as leaders in the EV transition?" },
+      { "id": 3, "type": "fill-in", "question": "How have traditional car manufacturers responded to the rise of electric vehicles?" },
+      { "id": 4, "type": "fill-in", "question": "Name one benefit and one challenge associated with electric vehicles." },
+      { "id": 5, "type": "fill-in", "question": "What environmental issue is linked with battery production for EVs?" },
+      { "id": 6, "type": "fill-in", "question": "How are governments helping to make EVs more accessible?" },
+      { "id": 7, "type": "fill-in", "question": "What is the overall future outlook for electric vehicles, according to the paragraph?" }
+    ]
+  },
+  {
+    "audio": "/audios/ilerts/ilerts-2-urban.mp3",
+    "text":"With urban populations growing rapidly, cities are beginning to explore new ways of producing food closer to where people live. Urban farming, which includes rooftop gardens, vertical farms, and community plots, is becoming an increasingly popular solution. These initiatives not only provide fresh produce locally but also help reduce transportation emissions and increase community engagement. Technological advancements like hydroponics and LED lighting have made it possible to grow food indoors all year round, regardless of climate. Cities like Singapore and New York are leading the way, integrating urban agriculture into their sustainability plans. However, critics argue that urban farming may not yet be scalable enough to replace traditional agriculture. Even so, many experts believe that urban farming will play an important supporting role in the global food system, especially in times of crisis or supply chain disruptions.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Why are cities turning to urban farming methods?" },
+      { "id": 2, "type": "fill-in", "question": "List two examples of urban farming mentioned in the paragraph." },
+      { "id": 3, "type": "fill-in", "question": "What are some environmental benefits of urban farming?" },
+      { "id": 4, "type": "fill-in", "question": "How has technology contributed to urban farming practices?" },
+      { "id": 5, "type": "fill-in", "question": "Which two cities are mentioned as leaders in urban agriculture?" },
+      { "id": 6, "type": "fill-in", "question": "What is one criticism of urban farming?" },
+      { "id": 7, "type": "fill-in", "question": "What role is urban farming expected to play in the future food system?" }
+    ]
+  },
+  {
+    "audio": "/audios/ilerts/ilerts-3-amazon.mp3",
+    "text":"Exploring the Amazon Rainforest is an experience like no other. Spanning across nine countries in South America, this vast ecosystem is home to an estimated 390 billion individual trees and over 16,000 species. Tourists and researchers alike are drawn to its dense biodiversity and unique wildlife, including jaguars, anacondas, and toucans. However, traveling through the Amazon can be physically demanding, with high humidity, unpredictable weather, and challenging terrain. Guides are essential, as navigation through the dense forest requires experience and knowledge of local flora and fauna. The indigenous communities that live within the Amazon have adapted to this environment over centuries, developing sustainable ways of life. Despite its natural beauty, the Amazon faces threats from deforestation, illegal mining, and climate change. Protecting it is not just important for the region, but for the planet as a whole.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "How many countries does the Amazon Rainforest span across?" },
+      { "id": 2, "type": "fill-in", "question": "Name at least two species found in the Amazon mentioned in the paragraph." },
+      { "id": 3, "type": "fill-in", "question": "What physical challenges do travelers face in the Amazon?" },
+      { "id": 4, "type": "fill-in", "question": "Why are guides considered essential for navigating the rainforest?" },
+      { "id": 5, "type": "fill-in", "question": "How have indigenous communities adapted to living in the Amazon?" },
+      { "id": 6, "type": "fill-in", "question": "What are some threats facing the Amazon today?" },
+      { "id": 7, "type": "fill-in", "question": "Why is protecting the Amazon important beyond its regional value?" }
+    ]
+  },
+  {
+    "audio": "/audios/ilerts/ilerts-4-socialmedia.mp3",
+    "text":"Social media has dramatically transformed the way people interact and communicate in the 21st century. Platforms like Facebook, Instagram, and Twitter have made it possible to connect with friends, family, and even strangers across the globe instantly. While this increased connectivity has many benefits, such as maintaining long-distance relationships and promoting social movements, it has also led to concerns about reduced face-to-face communication and increased feelings of isolation. Studies have shown that excessive social media use can negatively impact mental health, particularly among teenagers and young adults. Moreover, the spread of misinformation on these platforms has raised alarms among experts and policymakers. Despite these drawbacks, social media remains an integral part of modern life, with efforts underway to create a more balanced and responsible digital environment.",
+        "questions": [
+      { "id": 1, "type": "fill-in", "question": "What are three social media platforms mentioned in the paragraph?" },
+      { "id": 2, "type": "fill-in", "question": "What are two positive effects of social media on relationships?" },
+      { "id": 3, "type": "fill-in", "question": "According to studies, who is most affected by excessive social media use?" },
+      { "id": 4, "type": "fill-in", "question": "What mental health concern is associated with social media usage?" },
+      { "id": 5, "type": "fill-in", "question": "What issue has arisen due to the spread of information on social media?" },
+      { "id": 6, "type": "fill-in", "question": "Despite its drawbacks, why is social media still important in modern life?" },
+      { "id": 7, "type": "fill-in", "question": "What efforts are being made to improve the use of social media?" }
+    ]
+  },
+  {
+    "audio": "/audios/ilerts/ilerts-5-printing.mp3",
+    "text":"The invention of the printing press by Johannes Gutenberg in the mid-15th century revolutionized the way information was shared and preserved. Prior to this innovation, books were copied by hand, a slow and expensive process limited to the wealthy and religious institutions. Gutenberg's press made it possible to mass-produce texts, significantly reducing the cost of books and increasing literacy rates throughout Europe. This breakthrough played a key role in major historical movements, such as the Renaissance, the Reformation, and the Scientific Revolution. It allowed ideas to spread rapidly and encouraged intellectual exchange across borders. Over the centuries, printing technology continued to evolve, with the development of offset printing, digital printing, and now 3D printing. The legacy of Gutenberg’s invention is still evident today in how we access and disseminate knowledge.",
+    "questions": [
+      { "id": 1, "type": "fill-in", "question": "Who invented the printing press and in which century?" },
+      { "id": 2, "type": "fill-in", "question": "Why was book production difficult before the printing press?" },
+      { "id": 3, "type": "fill-in", "question": "How did Gutenberg’s press impact the cost and availability of books?" },
+      { "id": 4, "type": "fill-in", "question": "Name at least two historical movements influenced by the printing press." },
+      { "id": 5, "type": "fill-in", "question": "What role did the press play in spreading ideas?" },
+      { "id": 6, "type": "fill-in", "question": "Mention two later developments in printing technology." },
+      { "id": 7, "type": "fill-in", "question": "How is Gutenberg’s legacy visible in today’s world?" }
+    ]
+  }
+]

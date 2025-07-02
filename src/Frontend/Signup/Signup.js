@@ -52,7 +52,7 @@ const Signup = () => {
   return (
 <div className="d-flex justify-content-center align-items-center bg-light" style={{ minHeight: '100vh' }}>
  <div className="card shadow-lg p-4 border-0 rounded-3 signup-card"
-    style={{ maxWidth: "800px", width: "100%", maxHeight: "90vh", overflowY: "auto" }}>
+    style={{ maxWidth: "800px", width: "100%", maxHeight: "90vh", overflowY: "auto" ,marginTop:'50px' }}>
 
         <button
           className="btn btn-close position-absolute top-0 end-0 m-3"

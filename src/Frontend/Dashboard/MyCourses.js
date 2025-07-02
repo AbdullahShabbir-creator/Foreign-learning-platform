@@ -63,13 +63,36 @@ const MyCourses = ({ showPlaylists }) => {
                 {pl.videos && pl.videos.length > 0 && (
                   <ul style={{marginTop: 10, display: 'flex', flexWrap: 'wrap', gap: '24px'}}>
                     {pl.videos.map((vid, idx) => (
-                      <li key={vid.videoUrl} style={{marginLeft: 0, background: '#f8fafc', borderRadius: 8, padding: '10px 12px', minWidth: 170, boxShadow: '0 1px 4px rgba(0,0,0,0.04)'}}>
-                        <span style={{display: 'block', fontWeight: 500, marginBottom: 10, color: '#444'}}>{vid.videoTitle}</span>
-                        <video width="120" controls style={{display: 'block', borderRadius: 4, border: '1px solid #d1e3f7', background: '#f5f8fa'}}>
-                          <source src={vid.videoUrl} type="video/mp4" />
-                        </video>
-                      </li>
-                    ))}
+  <div
+    key={`http://localhost:5000${vid.videoUrl}`}
+    style={{
+      marginBottom: '20px',
+      background: '#f8fafc',
+      borderRadius: 8,
+      padding: '10px 12px',
+      maxWidth: 220,
+      boxShadow: '0 1px 4px rgba(0,0,0,0.04)',
+    }}
+  >
+    <div style={{ fontWeight: 500, marginBottom: 10, color: '#444' }}>
+      {vid.videoTitle}
+    </div>
+   <video
+  width="100%"
+  controls
+  style={{
+    borderRadius: 4,
+    border: '1px solid #d1e3f7',
+    background: '#f5f8fa',
+  }}
+>
+  <source src={`http://localhost:5000${vid.videoUrl}`} type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
+  </div>
+))}
+
                   </ul>
                 )}
               </li>
