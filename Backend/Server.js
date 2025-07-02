@@ -15,7 +15,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000','https://3ea7-2400-adc7-182-d400-b02d-6e2d-a708-f0dc.ngrok-free.app'],
   credentials: true
 }));
 
@@ -31,6 +31,8 @@ app.use('/api/video-reports', require('./routes/VideoReport'));
 app.use('/api/feedback', require('./routes/Feedback'))
 app.use('/api/instructors', require('./routes/Instructor'));
 app.use('/api/student', require('./routes/Student'));
+app.use('/api/results', require('./routes/Result'));  
+app.use("/api/listening-progress", require('./routes/ListeningProgress'));
 // Error handling middleware
 app.use((err, req, res, next) => {  
   console.error(err.stack);
